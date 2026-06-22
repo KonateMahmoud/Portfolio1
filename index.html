@@ -213,7 +213,28 @@ nav {
   position:relative; overflow:hidden;
   padding-top:80px;
 }
-.hero-bg { position:absolute; inset:0; background:var(--hero-grad); transition:background 0.4s; }
+.hero-bg {
+  position:absolute; inset:0;
+  background-size:cover;
+  background-position:center top;
+  background-repeat:no-repeat;
+  transition:background 0.4s;
+}
+/* Overlay sombre sur la photo (dark mode) */
+.hero-bg::before {
+  content:'';
+  position:absolute; inset:0;
+  background:
+    linear-gradient(to right, rgba(15,26,10,0.82) 0%, rgba(15,26,10,0.55) 55%, rgba(15,26,10,0.75) 100%),
+    var(--hero-grad);
+  transition:background 0.4s;
+}
+/* Overlay plus clair en light mode */
+[data-theme="light"] .hero-bg::before {
+  background:
+    linear-gradient(to right, rgba(250,246,238,0.88) 0%, rgba(250,246,238,0.6) 55%, rgba(250,246,238,0.78) 100%),
+    var(--hero-grad);
+}
 .baobab-svg {
   position:absolute; bottom:0; right:4%;
   width:260px; opacity:0.06;
@@ -575,7 +596,8 @@ footer {
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"></div>
+  <!-- ✏️ Remplace "VOTRE_PHOTO.jpg" par le chemin de ta photo -->
+  <div class="hero-bg" style="background-image: url('VOTRE_PHOTO.jpg');"></div>
   <svg class="baobab-svg" viewBox="0 0 200 300" fill="none">
     <rect x="85" y="150" width="30" height="150" fill="currentColor"/>
     <ellipse cx="100" cy="80" rx="80" ry="90" fill="currentColor"/>
@@ -830,7 +852,7 @@ footer {
     </div>
     <p class="contact-intro" data-i18n="contact_intro">Projet web, site WordPress, e-commerce local ou investissement dans l'élevage — je suis ouvert à toute collaboration sérieuse depuis Saint-Louis.</p>
     <div class="contact-methods">
-      <a href="mouhamethkonate0@gmail.com" class="contact-method">
+      <a href="mailto:mouhamethkonate0@gmail.com" class="contact-method">
         <span class="contact-method-icon">✉️</span>
         <span class="contact-method-label" data-i18n="contact_email">Email</span>
         <span class="contact-method-value">mouhamethkonate0@gmail.com</span>
