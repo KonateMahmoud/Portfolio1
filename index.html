@@ -74,18 +74,10 @@
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 
-  a,button,.project-card,.domain-card,.lang-option,.lang-btn,
-  .theme-btn,.btn-primary,.btn-outline,.qr-download-btn{}
-}
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;overflow-x:hidden;transition:background 0.4s,color 0.4s;}
 
-  a,button,.project-card,.domain-card,.lang-option,.lang-btn,
-  .theme-btn,.btn-primary,.btn-outline,.qr-download-btn{}
-}
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:0.25;}
-
-
 
 /* Glow BG */
 .bg-glow{position:fixed;top:20%;right:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,var(--glow) 0%,transparent 70%);pointer-events:none;z-index:0;}
@@ -290,12 +282,6 @@ footer{padding:1.7rem 4rem;border-top:1px solid var(--border);display:flex;justi
 .footer-copy{font-family:'IBM Plex Mono', monospace;font-size:0.57rem;letter-spacing:0.1em;color:var(--text-muted);opacity:0.55;}
 .footer-sig{font-family:'Syne', sans-serif;font-size:0.86rem;font-style:italic;color:var(--accent2);opacity:0.6;}
 
-/* SWITCH PORTFOLIO BANNER */
-.switch-banner{background:var(--surface);border-bottom:1px solid var(--border);padding:0.55rem 4rem;display:flex;align-items:center;justify-content:space-between;}
-.switch-text{font-family:'IBM Plex Mono', monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);}
-.switch-link{font-family:'IBM Plex Mono', monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);text-decoration:none;border:1px solid var(--border);padding:0.3rem 0.8rem;transition:all 0.3s;}
-.switch-link:hover{background:var(--accent);color:#050F0A;}
-
 /* SWITCH BANNER */
 .switch-banner{background:var(--surface);border-bottom:1px solid var(--border);padding:0.52rem 4rem;display:flex;align-items:center;justify-content:space-between;}
 .switch-text{font-family:'IBM Plex Mono', monospace;font-size:0.57rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);}
@@ -330,7 +316,6 @@ footer{padding:1.7rem 4rem;border-top:1px solid var(--border);display:flex;justi
   .projects-grid{grid-template-columns:1fr;}
   footer{flex-direction:column;gap:0.8rem;text-align:center;padding:1.5rem;}
   .switch-banner{padding:0.55rem 1.5rem;}
-  /* ── Hero mobile fixes ── */
   .hero-name{
     font-size: clamp(2rem, 11vw, 3rem);
     line-height: 1;
@@ -360,7 +345,6 @@ footer{padding:1.7rem 4rem;border-top:1px solid var(--border);display:flex;justi
     font-size: 0.65rem;
     padding: 0.85rem 1rem;
   }
-
 }
 </style>
 </head>
@@ -660,7 +644,7 @@ footer{padding:1.7rem 4rem;border-top:1px solid var(--border);display:flex;justi
         <span class="contact-method-label" data-i18n="ct_email">Email</span>
         <span class="contact-method-value">mouhamethkonate0@gmail.com</span>
       </a>
-      <a href="tel:+221XXXXXXXX" class="contact-method">
+      <a href="tel:+221785237967" class="contact-method">
         <span class="contact-method-icon">📱</span>
         <span class="contact-method-label" data-i18n="ct_phone">Téléphone</span>
         <span class="contact-method-value">+221 78 523 79 67</span>
@@ -870,46 +854,13 @@ function genpoly(n){let p=[1];for(let i=0;i<n;i++){const q=[0,...p];for(let j=0;
 function reedsolomon(data,n){const g=genpoly(n),msg=[...data,...new Uint8Array(n)];for(let i=0;i<data.length;i++){const c=msg[i];if(c)for(let j=0;j<n;j++)msg[i+1+j]^=mul(c,g[j]);}return msg.slice(data.length);}
 
 /* ---- QR Version 8, ECC-M ---- */
-// Ver8-M: 2 blocks, each: 26 data cw + 22 ECC cw, total data=52 cw
 const VER=8, SIZE=49;
-const BLOCKS=[{dc:13,ec:22},{dc:13,ec:22}]; // 2 blocks x 13 data cw = 26? 
-// Correction: Ver8-M = 2 blocks of (c=60,k=26,r=22) — actually:
-// Ver8 total codewords=154, ECC-M: 2 blocks, each block: 60 total, 38 data, 22 ecc
-// Let me use correct values from spec
-// Ver8-M: Group1: 2 blocks of (60,38,22) — total data=76 cw, but ver8 has 154 total
-// Actually simpler: use qr-creator approach
-
-// Correct Ver 8, ECC-M: 
-// 2 error correction blocks, each: 22 EC codewords
-// Data codewords: 60 per block → 2 blocks → wrong
-// Let me use the real spec table:
-// Version 8, ECC M: 154 total cw, 2 blocks, each block: (60 total, 38 data, 22 ec)
-// Total data = 76, but we need padding to 151 bytes < 154... 
-
-// SIMPLER APPROACH: Use a URL-only QR (vCard URL) or phone number
-// which fits in version 2-3 and works reliably
-// Best: encode phone as tel: URI — guaranteed to work on all phones
-
-window.renderQR = function(text, canvas, px) {
-  px = px || 4;
-  // Use the qrcode-generator algorithm via data URL approach
-  // Since we can't use external libs, we use a reliable small-data approach:
-  // Encode just the phone number as tel: link — version 1, always works
-  try {
-    encodeQR(text, canvas, px);
-    return true;
-  } catch(e) {
-    console.error('QR error:', e);
-    return false;
-  }
-};
+const BLOCKS=[{dc:13,ec:22},{dc:13,ec:22}];
 
 function encodeQR(text, canvas, px) {
   const bytes = new TextEncoder().encode(text);
   const len = bytes.length;
   
-  // Pick version based on data length (ECC level M)
-  // Ver1=16, Ver2=28, Ver3=44, Ver4=64, Ver5=86, Ver6=108, Ver7=124, Ver8=154
   const VCAPS = [0,16,28,44,64,86,108,124,154,182,216];
   let ver = 0;
   for(let v=1; v<=10; v++){ if(VCAPS[v]>=len){ver=v;break;} }
@@ -917,7 +868,6 @@ function encodeQR(text, canvas, px) {
   
   const sz = ver*4+17;
   
-  // ECC params per version (ECC-M)
   const ECC_PARAMS = {
     1:{dc:16,ec:10,blocks:1},2:{dc:28,ec:16,blocks:1},3:{dc:44,ec:26,blocks:1},
     4:{dc:64,ec:18,blocks:2},5:{dc:86,ec:24,blocks:2},6:{dc:108,ec:16,blocks:4},
@@ -927,24 +877,19 @@ function encodeQR(text, canvas, px) {
   const {dc:DCAP, ec:ECPB, blocks:NBLOCKS} = ECC_PARAMS[ver];
   const dcPerBlock = Math.floor(DCAP/NBLOCKS);
 
-  // 1. Encode bits (byte mode)
   const bits = [];
   const push = (v,n) => { for(let i=n-1;i>=0;i--)bits.push((v>>i)&1); };
-  push(0b0100, 4);           // byte mode
-  push(len, len<256?8:16);   // char count
+  push(0b0100, 4);
+  push(len, len<256?8:16);
   bytes.forEach(b => push(b, 8));
-  // Terminator
   for(let i=0;i<4&&bits.length<DCAP*8;i++) bits.push(0);
   while(bits.length%8) bits.push(0);
-  // Pad bytes
   const pads=[0xEC,0x11]; let pi=0;
   while(bits.length<DCAP*8) push(pads[pi++%2], 8);
 
-  // 2. Data codewords
   const dcAll=[];
   for(let i=0;i<bits.length;i+=8){let v=0;for(let j=0;j<8;j++)v=(v<<1)|bits[i+j];dcAll.push(v);}
 
-  // 3. Split into blocks & compute ECC
   const dataBlocks=[], eccBlocks=[];
   for(let b=0;b<NBLOCKS;b++){
     const start=b*dcPerBlock, end=(b===NBLOCKS-1)?DCAP:start+dcPerBlock;
@@ -953,18 +898,15 @@ function encodeQR(text, canvas, px) {
     eccBlocks.push(reedsolomon(blk, ECPB));
   }
 
-  // 4. Interleave
   const allCW=[];
   const maxDC=Math.max(...dataBlocks.map(b=>b.length));
   for(let i=0;i<maxDC;i++) dataBlocks.forEach(b=>{if(i<b.length)allCW.push(b[i]);});
   const maxEC=Math.max(...eccBlocks.map(b=>b.length));
   for(let i=0;i<maxEC;i++) eccBlocks.forEach(b=>{if(i<b.length)allCW.push(b[i]);});
 
-  // 5. Build matrix
   const M=Array.from({length:sz},()=>new Array(sz).fill(-1));
   const isFunc=(r,c)=>M[r]&&M[r][c]!==undefined&&M[r][c]!==-1;
 
-  // Finder patterns
   function finder(tr,tc){
     for(let r=-1;r<=7;r++) for(let c=-1;c<=7;c++){
       if(tr+r<0||tr+r>=sz||tc+c<0||tc+c>=sz) continue;
@@ -973,7 +915,6 @@ function encodeQR(text, canvas, px) {
   }
   finder(0,0); finder(0,sz-7); finder(sz-7,0);
 
-  // Alignment patterns (ver>=2)
   const ALIGN_POS={1:[],2:[6,18],3:[6,22],4:[6,26],5:[6,30],6:[6,34],7:[6,22,38],8:[6,24,42],9:[6,28,46],10:[6,26,46]};
   const apos=ALIGN_POS[ver]||[];
   for(let i=0;i<apos.length;i++) for(let j=0;j<apos.length;j++){
@@ -984,18 +925,14 @@ function encodeQR(text, canvas, px) {
     }
   }
 
-  // Timing
   for(let i=8;i<sz-8;i++){M[6][i]=M[6][i]===-1?i%2===0?1:0:M[6][i];M[i][6]=M[i][6]===-1?i%2===0?1:0:M[i][6];}
 
-  // Dark module
   M[4*ver+9][8]=1;
 
-  // Format info placeholders
   [0,1,2,3,4,5,7].forEach(i=>{M[8][i]=0;M[i][8]=0;});
   M[8][8]=0; M[7][8]=0;
   for(let i=0;i<8;i++){M[sz-1-i][8]=0;M[8][sz-8+i]=0;}
 
-  // 6. Place data bits
   const allBits=allCW.flatMap(cw=>Array.from({length:8},(_,i)=>(cw>>(7-i))&1));
   let bit=0; let going_up=true;
   for(let col=sz-1;col>=0;col-=2){
@@ -1012,29 +949,21 @@ function encodeQR(text, canvas, px) {
   }
   for(let r=0;r<sz;r++) for(let c=0;c<sz;c++) if(M[r][c]===-1)M[r][c]=0;
 
-  // 7. Apply mask 0: (r+c)%2===0
   const MASK_FUNC=(r,c)=>(r+c)%2===0;
   for(let r=0;r<sz;r++) for(let c=0;c<sz;c++){
-    // Skip function modules (rough check)
     if(r<9&&c<9) continue; if(r<9&&c>=sz-8) continue; if(r>=sz-8&&c<9) continue;
     if(r===6||c===6) continue;
     if(MASK_FUNC(r,c)) M[r][c]^=1;
   }
 
-  // 8. Format string for mask 0, ECC-M → format bits = 0x5412 XOR 0x5412
-  const FORMAT_MASK0_ECCM = 0x5412 ^ 0x5412; // = 0 ... use lookup
-  // Correct: format data for ECC-M, mask 0 = 0b00_101 after BCH = 0x77C4... 
-  // Using precomputed: ECC-M=1(01), mask=0(000) → raw=01_000 → BCH(01000)
-  // Precomputed format string for ECC-M, mask 0: 101010000010010
-  const FMT=0b101010000010010; // ECC-M, mask 0, verified
+  const FMT=0b101010000010010;
   const fb=FMT.toString(2).padStart(15,'0').split('').map(Number);
   [0,1,2,3,4,5,7].forEach((c,i)=>{M[8][c]=fb[i];M[c][8]=fb[i];});
   M[8][8]=fb[7]; M[7][8]=fb[6];
   [sz-7,sz-6,sz-5,sz-4,sz-3,sz-2,sz-1].forEach((r,i)=>{M[r][8]=fb[i+8];});
   [sz-8,sz-7,sz-6,sz-5,sz-4,sz-3,sz-2].forEach((c,i)=>{M[8][c]=fb[i+8];});
-  M[sz-8][8]=1; // dark module
+  M[sz-8][8]=1;
 
-  // 9. Draw on canvas
   const quiet=4;
   canvas.width=canvas.height=(sz+quiet*2)*px;
   const ctx=canvas.getContext('2d');
@@ -1044,14 +973,25 @@ function encodeQR(text, canvas, px) {
     if(M[r][c]) ctx.fillRect((quiet+c)*px,(quiet+r)*px,px,px);
 }
 
-})();
+function renderQR(text, canvas, px) {
+  px = px || 4;
+  try {
+    encodeQR(text, canvas, px);
+    return true;
+  } catch(e) {
+    console.error('QR error:', e);
+    return false;
+  }
+}
+
+window.renderQR = renderQR;
 
 function initQR(){
   const frame=document.querySelector('.qr-frame');
   const canvas=document.getElementById('qrCanvas');
   if(!frame||!canvas) return;
   const vcard=buildVCard(CONTACT);
-  if(!window.renderQR(vcard,canvas,4)){
+  if(!renderQR(vcard,canvas,4)){
     frame.innerHTML='<div style="font-size:0.7rem;color:var(--accent2);padding:1rem;text-align:center">QR non disponible</div>';
     return;
   }
@@ -1065,7 +1005,7 @@ function initQR(){
     });
   }
 }
-initQR();
+
 initQR();
 
 /* ===== HAMBURGER MENU ===== */
@@ -1089,19 +1029,13 @@ hamburger.addEventListener('click', () => {
 });
 drawerClose.addEventListener('click', closeDrawer);
 
-// Fermer si on clique en dehors du drawer
 navDrawer.addEventListener('click', e => {
   if(e.target === navDrawer) closeDrawer();
 });
 
-// Fermer sur Escape
 document.addEventListener('keydown', e => {
   if(e.key === 'Escape') closeDrawer();
 });
-
-// Mettre à jour les liens du drawer lors des changements de langue
-const _origApplyLang = applyLang;
-// (applyLang met déjà à jour tous les [data-i18n] dont ceux du drawer)
 
 /* Restore lang */
 const sl=localStorage.getItem('lang');
