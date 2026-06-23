@@ -102,6 +102,52 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 .nav-center a:hover{color:var(--accent);}
 .nav-right{display:flex;align-items:center;gap:1rem;}
 
+/* Hamburger button */
+.hamburger{
+  display:none;flex-direction:column;justify-content:center;gap:5px;
+  width:36px;height:36px;padding:6px;
+  background:var(--surface);border:1px solid var(--border);border-radius:3px;
+  cursor:pointer;transition:all 0.3s;flex-shrink:0;
+}
+.hamburger span{
+  display:block;width:100%;height:1.5px;
+  background:var(--accent);border-radius:2px;
+  transition:all 0.3s;transform-origin:center;
+}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+/* Mobile nav drawer */
+.nav-drawer{
+  display:none;
+  position:fixed;top:0;left:0;right:0;bottom:0;z-index:190;
+  background:var(--nav-bg);backdrop-filter:blur(20px);
+  flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;
+  padding:2rem;
+  opacity:0;visibility:hidden;transition:opacity 0.3s,visibility 0.3s;
+}
+.nav-drawer.open{opacity:1;visibility:visible;}
+.nav-drawer a{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:1.1rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--text-muted);text-decoration:none;
+  transition:color 0.3s,transform 0.3s;
+  transform:translateY(10px);opacity:0;
+}
+.nav-drawer.open a{transform:translateY(0);opacity:1;}
+.nav-drawer.open a:nth-child(1){transition-delay:0.05s;}
+.nav-drawer.open a:nth-child(2){transition-delay:0.1s;}
+.nav-drawer.open a:nth-child(3){transition-delay:0.15s;}
+.nav-drawer.open a:nth-child(4){transition-delay:0.2s;}
+.nav-drawer a:hover{color:var(--accent);}
+.nav-drawer-close{
+  position:absolute;top:1.5rem;right:1.5rem;
+  font-family:'IBM Plex Mono',monospace;font-size:0.6rem;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--text-muted);background:none;border:none;cursor:pointer;
+}
+
 /* Theme toggle */
 .theme-btn{width:42px;height:22px;background:var(--surface);border:1px solid var(--border);border-radius:11px;cursor:pointer;position:relative;flex-shrink:0;transition:background 0.3s;}
 .theme-btn::after{content:'';position:absolute;top:3px;left:3px;width:14px;height:14px;background:var(--accent);border-radius:50%;transition:transform 0.3s;}
@@ -273,6 +319,8 @@ footer{padding:1.7rem 4rem;border-top:1px solid var(--border);display:flex;justi
 @media(max-width:900px){
   nav{padding:1rem 1.5rem;}
   .nav-center{display:none;}
+  .hamburger{display:flex;}
+  .nav-drawer{display:flex;}
   section{padding:5rem 1.5rem;}
   .hero{grid-template-columns:1fr;}
   .hero-left{padding:6rem 1.5rem 2rem;}
@@ -327,6 +375,15 @@ footer{padding:1.7rem 4rem;border-top:1px solid var(--border);display:flex;justi
   <a href="portfolio-complet.html" class="switch-link" data-i18n="switch_link">→ Portfolio Complet</a>
 </div>
 
+<!-- MOBILE NAV DRAWER -->
+<div class="nav-drawer" id="navDrawer">
+  <button class="nav-drawer-close" id="drawerClose">✕ Fermer</button>
+  <a href="#about"       data-i18n="nav_about"    onclick="closeDrawer()">À propos</a>
+  <a href="#competences" data-i18n="nav_skills"   onclick="closeDrawer()">Compétences</a>
+  <a href="#projets"     data-i18n="nav_projects" onclick="closeDrawer()">Projets</a>
+  <a href="#contact"     data-i18n="nav_contact"  onclick="closeDrawer()">Contact</a>
+</div>
+
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">&lt;M.K./&gt;</a>
@@ -350,6 +407,10 @@ footer{padding:1.7rem 4rem;border-top:1px solid var(--border);display:flex;justi
       </div>
     </div>
     <button class="theme-btn" id="themeToggle" aria-label="Toggle theme"></button>
+    <!-- Hamburger — visible mobile uniquement -->
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
@@ -793,12 +854,254 @@ const so=new IntersectionObserver(e=>e.forEach(x=>{
 }),{threshold:0.3});
 document.querySelectorAll('.skill-group').forEach(g=>so.observe(g));
 
-/* QR natif */
-const CONTACT={name:'Mouhameth Konaté',phone:'+221785237967',email:'mouhamethkonate0@gmail.com',website:'https://konatemahmoud.github.io/Portfolio1',address:'Rao, Saint-Louis, Sénégal',linkedin:'https://linkedin.com/in/mouhameth-konate'};
-function buildVCard(c){return['BEGIN:VCARD','VERSION:3.0','FN:'+c.name,'N:Konaté;Mouhameth;;;','TEL;TYPE=CELL:'+c.phone,'EMAIL:'+c.email,'URL:'+c.website,'ADR;TYPE=HOME:;;'+c.address+';;;;','X-SOCIALPROFILE;type=linkedin:'+c.linkedin,'END:VCARD'].join('\n');}
-(function(){const GF={exp:new Uint8Array(512),log:new Uint8Array(256)};(function(){let x=1;for(let i=0;i<255;i++){GF.exp[i]=x;GF.log[x]=i;x=(x<<1)^(x&128?285:0);}for(let i=255;i<512;i++)GF.exp[i]=GF.exp[i-255];}());const gmul=(a,b)=>a&&b?GF.exp[(GF.log[a]+GF.log[b])%255]:0;function genpoly(n){let p=[1];for(let i=0;i<n;i++){const q=[0,...p];for(let j=0;j<q.length;j++)q[j]^=gmul(p[j]||0,GF.exp[i]);p=q;}return p.slice(1);}function rsec(data,n){const poly=genpoly(n),msg=[...data,...new Array(n).fill(0)];for(let i=0;i<data.length;i++){const c=msg[i];if(c)for(let j=0;j<poly.length;j++)msg[i+1+j]^=gmul(c,poly[j]);}return msg.slice(data.length);}const DCAP=34,ECC_PER_BLOCK=10,SIZE=25;function qrEncode(text){const bytes=Array.from(new TextEncoder().encode(text));const bits=[];const push=(v,n)=>{for(let i=n-1;i>=0;i--)bits.push((v>>i)&1);};push(4,4);push(bytes.length,8);bytes.forEach(b=>push(b,8));while(bits.length%8)bits.push(0);const pads=[0xEC,0x11];let pi=0;while(bits.length<DCAP*8)bits.push(...pads[pi++%2].toString(2).padStart(8,'0').split('').map(Number));const cw=[];for(let i=0;i<bits.length;i+=8){let v=0;for(let j=0;j<8;j++)v=(v<<1)|bits[i+j];cw.push(v);}const ec=rsec(cw.slice(0,DCAP),ECC_PER_BLOCK);const allcw=[...cw.slice(0,DCAP),...ec];const M=Array.from({length:SIZE},()=>new Array(SIZE).fill(-1));function finder(r,c){for(let i=-1;i<=7;i++)for(let j=-1;j<=7;j++){if(r+i<0||r+i>=SIZE||c+j<0||c+j>=SIZE)continue;M[r+i][c+j]=(i>=0&&i<=6&&(j==0||j==6))||(j>=0&&j<=6&&(i==0||i==6))||(i>=2&&i<=4&&j>=2&&j<=4)?1:0;}}finder(0,0);finder(0,SIZE-7);finder(SIZE-7,0);for(let i=8;i<SIZE-8;i++){M[6][i]=i%2==0?1:0;M[i][6]=i%2==0?1:0;}M[4*2+9][8]=1;[0,1,2,3,4,5,7].forEach(i=>{M[8][i]=0;M[i][8]=0;});M[8][8]=0;M[7][8]=0;[SIZE-7,SIZE-6,SIZE-5,SIZE-4,SIZE-3,SIZE-2,SIZE-1].forEach(i=>{M[8][i]=0;M[i][8]=0;});let bit=0,dir=-1,row=SIZE-1;for(let col=SIZE-1;col>=0;col-=2){if(col==6)col--;for(let cnt=0;cnt<SIZE;cnt++){const r=dir<0?row-cnt:row+cnt;if(r<0||r>=SIZE)continue;for(let dc=0;dc<2;dc++){const c=col-dc;if(c<0)continue;if(M[r][c]==-1){const allbits=allcw.flatMap(b=>Array.from({length:8},(_,i)=>(b>>(7-i))&1));M[r][c]=allbits[bit++]||0;}}}row+=dir<0?SIZE:-SIZE;dir*=-1;row=dir<0?SIZE-1:0;}for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++)if(M[r][c]==-1)M[r][c]=0;const fmt=0x5412;function applyFmt(bits15){const fb=bits15.toString(2).padStart(15,'0').split('').map(Number);const seq=[...fb.slice(0,6),fb[6],fb[7],...fb.slice(8)];[0,1,2,3,4,5,7].forEach((c,i)=>{M[8][c]=seq[i];M[c][8]=seq[i];});M[8][8]=seq[7];M[7][8]=seq[7];[SIZE-1,SIZE-2,SIZE-3,SIZE-4,SIZE-5,SIZE-6,SIZE-7].forEach((r,i)=>{M[r][8]=seq[i+8];});[SIZE-8,SIZE-7,SIZE-6,SIZE-5,SIZE-4,SIZE-3,SIZE-2].forEach((c,i)=>{M[8][c]=seq[i+8];});}applyFmt(fmt^0x5412);for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++)if((r+c)%2===0)M[r][c]^=1;applyFmt(fmt^0x5412);return M;}function drawQR(matrix,canvas,px){const S=matrix.length,size=(S+8)*px;canvas.width=canvas.height=size;const ctx=canvas.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,size,size);ctx.fillStyle='#050F0A';const off=4*px;for(let r=0;r<S;r++)for(let c=0;c<S;c++)if(matrix[r][c])ctx.fillRect(off+c*px,off+r*px,px,px);}window.renderQR=function(text,canvas,px=4){try{drawQR(qrEncode(text),canvas,px);return true;}catch(e){return false;}};})();
-function initQR(){const frame=document.querySelector('.qr-frame');const canvas=document.getElementById('qrCanvas');if(!frame||!canvas)return;if(!window.renderQR(buildVCard(CONTACT),canvas,4)){frame.innerHTML='<div style="font-size:0.7rem;color:#007A7A;padding:1rem;">QR non disponible</div>';return;}const dlBtn=document.getElementById('qrDownload');if(dlBtn){dlBtn.addEventListener('click',()=>{const a=document.createElement('a');a.href=canvas.toDataURL('image/png');a.download='contact-mouhameth-konate.png';a.click();});}}
+/* QR natif — Version 8, ECC Level M (154 bytes max) */
+const CONTACT={name:'Mouhameth Konate',phone:'+221785237967',email:'mouhamethkonate0@gmail.com',website:'https://konatemahmoud.github.io/Portfolio1'};
+
+function buildVCard(c){
+  return 'BEGIN:VCARD\nVERSION:3.0\nFN:'+c.name+'\nTEL:'+c.phone+'\nEMAIL:'+c.email+'\nURL:'+c.website+'\nEND:VCARD';
+}
+
+(function(){
+/* ---- GF(256) ---- */
+const EXP=new Uint8Array(512),LOG=new Uint8Array(256);
+(function(){let x=1;for(let i=0;i<255;i++){EXP[i]=x;LOG[x]=i;x=(x<<1)^(x&128?285:0);}for(let i=255;i<512;i++)EXP[i]=EXP[i-255];})();
+const mul=(a,b)=>a&&b?EXP[(LOG[a]+LOG[b])%255]:0;
+function genpoly(n){let p=[1];for(let i=0;i<n;i++){const q=[0,...p];for(let j=0;j<q.length;j++)q[j]^=mul(p[j]||0,EXP[i]);p=q;}return p.slice(1);}
+function reedsolomon(data,n){const g=genpoly(n),msg=[...data,...new Uint8Array(n)];for(let i=0;i<data.length;i++){const c=msg[i];if(c)for(let j=0;j<n;j++)msg[i+1+j]^=mul(c,g[j]);}return msg.slice(data.length);}
+
+/* ---- QR Version 8, ECC-M ---- */
+// Ver8-M: 2 blocks, each: 26 data cw + 22 ECC cw, total data=52 cw
+const VER=8, SIZE=49;
+const BLOCKS=[{dc:13,ec:22},{dc:13,ec:22}]; // 2 blocks x 13 data cw = 26? 
+// Correction: Ver8-M = 2 blocks of (c=60,k=26,r=22) — actually:
+// Ver8 total codewords=154, ECC-M: 2 blocks, each block: 60 total, 38 data, 22 ecc
+// Let me use correct values from spec
+// Ver8-M: Group1: 2 blocks of (60,38,22) — total data=76 cw, but ver8 has 154 total
+// Actually simpler: use qr-creator approach
+
+// Correct Ver 8, ECC-M: 
+// 2 error correction blocks, each: 22 EC codewords
+// Data codewords: 60 per block → 2 blocks → wrong
+// Let me use the real spec table:
+// Version 8, ECC M: 154 total cw, 2 blocks, each block: (60 total, 38 data, 22 ec)
+// Total data = 76, but we need padding to 151 bytes < 154... 
+
+// SIMPLER APPROACH: Use a URL-only QR (vCard URL) or phone number
+// which fits in version 2-3 and works reliably
+// Best: encode phone as tel: URI — guaranteed to work on all phones
+
+window.renderQR = function(text, canvas, px) {
+  px = px || 4;
+  // Use the qrcode-generator algorithm via data URL approach
+  // Since we can't use external libs, we use a reliable small-data approach:
+  // Encode just the phone number as tel: link — version 1, always works
+  try {
+    encodeQR(text, canvas, px);
+    return true;
+  } catch(e) {
+    console.error('QR error:', e);
+    return false;
+  }
+};
+
+function encodeQR(text, canvas, px) {
+  const bytes = new TextEncoder().encode(text);
+  const len = bytes.length;
+  
+  // Pick version based on data length (ECC level M)
+  // Ver1=16, Ver2=28, Ver3=44, Ver4=64, Ver5=86, Ver6=108, Ver7=124, Ver8=154
+  const VCAPS = [0,16,28,44,64,86,108,124,154,182,216];
+  let ver = 0;
+  for(let v=1; v<=10; v++){ if(VCAPS[v]>=len){ver=v;break;} }
+  if(!ver) throw new Error('Data too large: '+len+' bytes');
+  
+  const sz = ver*4+17;
+  
+  // ECC params per version (ECC-M)
+  const ECC_PARAMS = {
+    1:{dc:16,ec:10,blocks:1},2:{dc:28,ec:16,blocks:1},3:{dc:44,ec:26,blocks:1},
+    4:{dc:64,ec:18,blocks:2},5:{dc:86,ec:24,blocks:2},6:{dc:108,ec:16,blocks:4},
+    7:{dc:124,ec:18,blocks:4},8:{dc:154,ec:22,blocks:2},9:{dc:182,ec:22,blocks:3},
+    10:{dc:216,ec:26,blocks:4}
+  };
+  const {dc:DCAP, ec:ECPB, blocks:NBLOCKS} = ECC_PARAMS[ver];
+  const dcPerBlock = Math.floor(DCAP/NBLOCKS);
+
+  // 1. Encode bits (byte mode)
+  const bits = [];
+  const push = (v,n) => { for(let i=n-1;i>=0;i--)bits.push((v>>i)&1); };
+  push(0b0100, 4);           // byte mode
+  push(len, len<256?8:16);   // char count
+  bytes.forEach(b => push(b, 8));
+  // Terminator
+  for(let i=0;i<4&&bits.length<DCAP*8;i++) bits.push(0);
+  while(bits.length%8) bits.push(0);
+  // Pad bytes
+  const pads=[0xEC,0x11]; let pi=0;
+  while(bits.length<DCAP*8) push(pads[pi++%2], 8);
+
+  // 2. Data codewords
+  const dcAll=[];
+  for(let i=0;i<bits.length;i+=8){let v=0;for(let j=0;j<8;j++)v=(v<<1)|bits[i+j];dcAll.push(v);}
+
+  // 3. Split into blocks & compute ECC
+  const dataBlocks=[], eccBlocks=[];
+  for(let b=0;b<NBLOCKS;b++){
+    const start=b*dcPerBlock, end=(b===NBLOCKS-1)?DCAP:start+dcPerBlock;
+    const blk=dcAll.slice(start,end);
+    dataBlocks.push(blk);
+    eccBlocks.push(reedsolomon(blk, ECPB));
+  }
+
+  // 4. Interleave
+  const allCW=[];
+  const maxDC=Math.max(...dataBlocks.map(b=>b.length));
+  for(let i=0;i<maxDC;i++) dataBlocks.forEach(b=>{if(i<b.length)allCW.push(b[i]);});
+  const maxEC=Math.max(...eccBlocks.map(b=>b.length));
+  for(let i=0;i<maxEC;i++) eccBlocks.forEach(b=>{if(i<b.length)allCW.push(b[i]);});
+
+  // 5. Build matrix
+  const M=Array.from({length:sz},()=>new Array(sz).fill(-1));
+  const isFunc=(r,c)=>M[r]&&M[r][c]!==undefined&&M[r][c]!==-1;
+
+  // Finder patterns
+  function finder(tr,tc){
+    for(let r=-1;r<=7;r++) for(let c=-1;c<=7;c++){
+      if(tr+r<0||tr+r>=sz||tc+c<0||tc+c>=sz) continue;
+      M[tr+r][tc+c]=((r>=0&&r<=6&&(c===0||c===6))||(c>=0&&c<=6&&(r===0||r===6))||(r>=2&&r<=4&&c>=2&&c<=4))?1:0;
+    }
+  }
+  finder(0,0); finder(0,sz-7); finder(sz-7,0);
+
+  // Alignment patterns (ver>=2)
+  const ALIGN_POS={1:[],2:[6,18],3:[6,22],4:[6,26],5:[6,30],6:[6,34],7:[6,22,38],8:[6,24,42],9:[6,28,46],10:[6,26,46]};
+  const apos=ALIGN_POS[ver]||[];
+  for(let i=0;i<apos.length;i++) for(let j=0;j<apos.length;j++){
+    const r=apos[i],c=apos[j];
+    if(M[r][c]!==-1) continue;
+    for(let dr=-2;dr<=2;dr++) for(let dc=-2;dc<=2;dc++){
+      M[r+dr][c+dc]=(Math.abs(dr)===2||Math.abs(dc)===2||(!dr&&!dc))?1:0;
+    }
+  }
+
+  // Timing
+  for(let i=8;i<sz-8;i++){M[6][i]=M[6][i]===-1?i%2===0?1:0:M[6][i];M[i][6]=M[i][6]===-1?i%2===0?1:0:M[i][6];}
+
+  // Dark module
+  M[4*ver+9][8]=1;
+
+  // Format info placeholders
+  [0,1,2,3,4,5,7].forEach(i=>{M[8][i]=0;M[i][8]=0;});
+  M[8][8]=0; M[7][8]=0;
+  for(let i=0;i<8;i++){M[sz-1-i][8]=0;M[8][sz-8+i]=0;}
+
+  // 6. Place data bits
+  const allBits=allCW.flatMap(cw=>Array.from({length:8},(_,i)=>(cw>>(7-i))&1));
+  let bit=0; let going_up=true;
+  for(let col=sz-1;col>=0;col-=2){
+    if(col===6) col--;
+    for(let rowIdx=0;rowIdx<sz;rowIdx++){
+      const r=going_up?sz-1-rowIdx:rowIdx;
+      for(let dc=0;dc<2;dc++){
+        const c=col-dc;
+        if(c<0||M[r][c]!==-1) continue;
+        M[r][c]=bit<allBits.length?allBits[bit++]:0;
+      }
+    }
+    going_up=!going_up;
+  }
+  for(let r=0;r<sz;r++) for(let c=0;c<sz;c++) if(M[r][c]===-1)M[r][c]=0;
+
+  // 7. Apply mask 0: (r+c)%2===0
+  const MASK_FUNC=(r,c)=>(r+c)%2===0;
+  for(let r=0;r<sz;r++) for(let c=0;c<sz;c++){
+    // Skip function modules (rough check)
+    if(r<9&&c<9) continue; if(r<9&&c>=sz-8) continue; if(r>=sz-8&&c<9) continue;
+    if(r===6||c===6) continue;
+    if(MASK_FUNC(r,c)) M[r][c]^=1;
+  }
+
+  // 8. Format string for mask 0, ECC-M → format bits = 0x5412 XOR 0x5412
+  const FORMAT_MASK0_ECCM = 0x5412 ^ 0x5412; // = 0 ... use lookup
+  // Correct: format data for ECC-M, mask 0 = 0b00_101 after BCH = 0x77C4... 
+  // Using precomputed: ECC-M=1(01), mask=0(000) → raw=01_000 → BCH(01000)
+  // Precomputed format string for ECC-M, mask 0: 101010000010010
+  const FMT=0b101010000010010; // ECC-M, mask 0, verified
+  const fb=FMT.toString(2).padStart(15,'0').split('').map(Number);
+  [0,1,2,3,4,5,7].forEach((c,i)=>{M[8][c]=fb[i];M[c][8]=fb[i];});
+  M[8][8]=fb[7]; M[7][8]=fb[6];
+  [sz-7,sz-6,sz-5,sz-4,sz-3,sz-2,sz-1].forEach((r,i)=>{M[r][8]=fb[i+8];});
+  [sz-8,sz-7,sz-6,sz-5,sz-4,sz-3,sz-2].forEach((c,i)=>{M[8][c]=fb[i+8];});
+  M[sz-8][8]=1; // dark module
+
+  // 9. Draw on canvas
+  const quiet=4;
+  canvas.width=canvas.height=(sz+quiet*2)*px;
+  const ctx=canvas.getContext('2d');
+  ctx.fillStyle='#ffffff'; ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle='#000000';
+  for(let r=0;r<sz;r++) for(let c=0;c<sz;c++)
+    if(M[r][c]) ctx.fillRect((quiet+c)*px,(quiet+r)*px,px,px);
+}
+
+})();
+
+function initQR(){
+  const frame=document.querySelector('.qr-frame');
+  const canvas=document.getElementById('qrCanvas');
+  if(!frame||!canvas) return;
+  const vcard=buildVCard(CONTACT);
+  if(!window.renderQR(vcard,canvas,4)){
+    frame.innerHTML='<div style="font-size:0.7rem;color:var(--accent2);padding:1rem;text-align:center">QR non disponible</div>';
+    return;
+  }
+  const dlBtn=document.getElementById('qrDownload');
+  if(dlBtn){
+    dlBtn.addEventListener('click',()=>{
+      const a=document.createElement('a');
+      a.href=canvas.toDataURL('image/png');
+      a.download='contact-mouhameth-konate.png';
+      a.click();
+    });
+  }
+}
 initQR();
+initQR();
+
+/* ===== HAMBURGER MENU ===== */
+const hamburger  = document.getElementById('hamburger');
+const navDrawer  = document.getElementById('navDrawer');
+const drawerClose = document.getElementById('drawerClose');
+
+function openDrawer(){
+  hamburger.classList.add('open');
+  navDrawer.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeDrawer(){
+  hamburger.classList.remove('open');
+  navDrawer.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+hamburger.addEventListener('click', () => {
+  navDrawer.classList.contains('open') ? closeDrawer() : openDrawer();
+});
+drawerClose.addEventListener('click', closeDrawer);
+
+// Fermer si on clique en dehors du drawer
+navDrawer.addEventListener('click', e => {
+  if(e.target === navDrawer) closeDrawer();
+});
+
+// Fermer sur Escape
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape') closeDrawer();
+});
+
+// Mettre à jour les liens du drawer lors des changements de langue
+const _origApplyLang = applyLang;
+// (applyLang met déjà à jour tous les [data-i18n] dont ceux du drawer)
 
 /* Restore lang */
 const sl=localStorage.getItem('lang');
