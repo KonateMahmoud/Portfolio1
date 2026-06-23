@@ -1,92 +1,233 @@
 <!DOCTYPE html>
 <html lang="fr" data-theme="dark" dir="ltr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0i[...]">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iIzA1MEYwQSIvPgogIDxyZWN0IHg9IjEiIHk9IjEiIHdpZHRoPSIzMCIgaGVpZ2h0PSIzMCIgcng9IjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwRTY3NiIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8dGV4dCB4PSIxNiIgeT0iMjIiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSJib2xkIgogICAgZmlsbD0iIzAwRTY3NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgbGV0dGVyLXNwYWNpbmc9Ii0xIj5NSzwvdGV4dD4KPC9zdmc+">
 
-<title>Mouhameth Konaté — Développeur Web PHP & WordPress</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&family=Noto+Sans+Arabic:wght@300;400;500;700[...]" rel="stylesheet">
-<style>
-/* ===== OPTION G — VERT MATRIX & NOIR ===== */
-:root {
-  --accent:      #00E676;
-  --accent2:     #00897B;
-  --accent-soft: rgba(0,230,118,0.12);
-}
-[data-theme="dark"] {
-  --bg:          #050F0A;
-  --bg-alt:      #071510;
-  --surface:     rgba(0,230,118,0.06);
-  --border:      rgba(0,230,118,0.18);
-  --text:        #D8F5E8;
-  --text-muted:  #4AAA78;
-  --text-dim:    rgba(216,245,232,0.5);
-  --card-bg:     rgba(0,230,118,0.04);
-  --nav-bg:      rgba(5,15,10,0.94);
-  --stat-bg:     rgba(0,230,118,0.07);
-  --stat-border: rgba(0,230,118,0.25);
-  --tag-bg:      rgba(0,230,118,0.07);
-  --dropdown-bg: #071A10;
-  --dropdown-hover: rgba(0,230,118,0.1);
-  --hero-grad:
-    radial-gradient(ellipse 80% 60% at 70% 50%, rgba(0,230,118,0.08) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 80% at 15% 80%, rgba(0,137,123,0.15) 0%, transparent 60%);
-  --glow: rgba(0,230,118,0.06);
-}
-[data-theme="light"] {
-  --bg:          #F3FAF6;
-  --bg-alt:      #E8F5EE;
-  --surface:     rgba(0,137,123,0.07);
-  --border:      rgba(0,137,123,0.2);
-  --text:        #071A10;
-  --text-muted:  #1A7A50;
-  --text-dim:    rgba(7,26,16,0.55);
-  --card-bg:     rgba(255,255,255,0.92);
-  --nav-bg:      rgba(243,250,246,0.96);
-  --stat-bg:     rgba(0,137,123,0.07);
-  --stat-border: rgba(0,137,123,0.25);
-  --tag-bg:      rgba(0,168,84,0.08);
-  --dropdown-bg: #E4F5EC;
-  --dropdown-hover: rgba(0,168,84,0.1);
-  --hero-grad:
-    radial-gradient(ellipse 80% 60% at 70% 50%, rgba(0,230,118,0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 80% at 15% 80%, rgba(0,137,123,0.06) 0%, transparent 60%);
-  --glow: rgba(0,230,118,0.05);
-}
+  <title>Mouhameth Konaté — Développeur Web PHP & WordPress</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&family=Noto+Sans+Arabic:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+  /* ===== VARIABLES DE THÈME ===== */
+  :root {
+    --accent:      #00E676;
+    --accent2:     #00897B;
+    --accent-soft: rgba(0,230,118,0.12);
+  }
+  [data-theme="dark"] {
+    --bg:          #050F0A;
+    --bg-alt:      #071510;
+    --surface:     rgba(0,230,118,0.06);
+    --border:      rgba(0,230,118,0.18);
+    --text:        #D8F5E8;
+    --text-muted:  #4AAA78;
+    --text-dim:    rgba(216,245,232,0.5);
+    --card-bg:     rgba(0,230,118,0.04);
+    --nav-bg:      rgba(5,15,10,0.94);
+    --stat-bg:     rgba(0,230,118,0.07);
+    --stat-border: rgba(0,230,118,0.25);
+    --tag-bg:      rgba(0,230,118,0.07);
+    --dropdown-bg: #071A10;
+    --dropdown-hover: rgba(0,230,118,0.1);
+    --hero-grad:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(0,230,118,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 80% at 15% 80%, rgba(0,137,123,0.15) 0%, transparent 60%);
+    --glow: rgba(0,230,118,0.06);
+  }
+  [data-theme="light"] {
+    --bg:          #F3FAF6;
+    --bg-alt:      #E8F5EE;
+    --surface:     rgba(0,137,123,0.07);
+    --border:      rgba(0,137,123,0.2);
+    --text:        #071A10;
+    --text-muted:  #1A7A50;
+    --text-dim:    rgba(7,26,16,0.55);
+    --card-bg:     rgba(255,255,255,0.92);
+    --nav-bg:      rgba(243,250,246,0.96);
+    --stat-bg:     rgba(0,137,123,0.07);
+    --stat-border: rgba(0,137,123,0.25);
+    --tag-bg:      rgba(0,168,84,0.08);
+    --dropdown-bg: #E4F5EC;
+    --dropdown-hover: rgba(0,168,84,0.1);
+    --hero-grad:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(0,230,118,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 80% at 15% 80%, rgba(0,137,123,0.06) 0%, transparent 60%);
+    --glow: rgba(0,230,118,0.05);
+  }
 
-/* Arabic */
-[lang="ar"] body,[lang="ar"] p,
-[lang="ar"] h1,[lang="ar"] h2,[lang="ar"] h3,
-[lang="ar"] .hero-title,[lang="ar"] .domain-desc,
-[lang="ar"] .project-desc,[lang="ar"] .about-text p,
-[lang="ar"] .contact-intro { font-family:'Noto Sans Arabic','Outfit',sans-serif; }
+  /* Support de l'Arabe (RTL) */
+  [lang="ar"] body, [lang="ar"] p, [lang="ar"] h1, [lang="ar"] h2, [lang="ar"] h3,
+  [lang="ar"] .hero-title, [lang="ar"] .domain-desc, [lang="ar"] .project-desc, 
+  [lang="ar"] .about-text p, [lang="ar"] .contact-intro { 
+    font-family:'Noto Sans Arabic','Outfit',sans-serif; 
+  }
 
-/* RTL */
-[dir="rtl"] .hero-eyebrow::before { display:none; }
-[dir="rtl"] .hero-eyebrow::after { content:'';display:block;width:38px;height:1px;background:var(--accent2); }
-[dir="rtl"] .section-line { background:linear-gradient(270deg,var(--border),transparent); }
-[dir="rtl"] .domain-card { border-left:none;border-right:2px solid var(--accent2); }
-[dir="rtl"] .domain-card:hover { border-right-color:var(--accent);transform:translateX(-5px); }
-[dir="rtl"] .skill-fill { transform-origin:right; }
+  [dir="rtl"] .hero-eyebrow::before { display:none; }
+  [dir="rtl"] .hero-eyebrow::after { content:''; display:block; width:38px; height:1px; background:var(--accent2); }
+  [dir="rtl"] .section-line { background:linear-gradient(270deg,var(--border),transparent); }
+  [dir="rtl"] .domain-card { border-left:none; border-right:2px solid var(--accent2); }
+  [dir="rtl"] .domain-card:hover { border-right-color:var(--accent); transform:translateX(-5px); }
+  [dir="rtl"] .skill-fill { transform-origin:right; }
 
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  /* Styles de Base */
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { 
+    background:var(--bg); 
+    color:var(--text); 
+    font-family:'Outfit',sans-serif; 
+    overflow-x:hidden; 
+    transition:background 0.4s, color 0.4s; 
+  }
+  
+  /* Effet de texture "grain" en arrière-plan */
+  body::before { 
+    content:''; position:fixed; inset:0; 
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); 
+    pointer-events:none; z-index:1000; opacity:0.25; 
+  }
 
-  a,button,.project-card,.domain-card,.lang-option,.lang-btn,
-  .theme-btn,.btn-primary,.btn-outline,.qr-download-btn{}
-}
-html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;overflow-x:hidden;transition:background 0.4s,color 0.4s;}
+  /* Glows Ambiants */
+  .bg-glow { position:fixed; top:20%; right:-10%; width:500px; height:500px; border-radius:50%; background:radial-gradient(circle,var(--glow) 0%,transparent 70%); pointer-events:none; z-index:0; }
+  .bg-glow2 { position:fixed; bottom:-5%; left:-5%; width:400px; height:400px; border-radius:50%; background:radial-gradient(circle,var(--glow) 0%,transparent 70%); pointer-events:none; z-index:0; }
 
-  a,button,.project-card,.domain-card,.lang-option,.lang-btn,
-  .theme-btn,.btn-primary,.btn-outline,.qr-download-btn{}
-}
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='f[...] ");}
+  /* Lignes de scan style Terminal Matrix */
+  body::after { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,230,118,0.012) 3px,rgba(0,230,118,0.012) 4px); pointer-events:none; z-index:999; }
 
-/* rest of CSS unchanged... (truncated for brevity) */
-</style>
+  /* BARRE DE NAVIGATION */
+  nav { position:fixed; top:0; left:0; right:0; z-index:200; display:flex; justify-content:space-between; align-items:center; padding:1.2rem 4rem; background:var(--nav-bg); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); transition:background 0.4s, border-color 0.4s; }
+  .nav-logo { font-family:'Syne', sans-serif; font-size:1.3rem; font-weight:900; letter-spacing:-0.02em; color:var(--accent); text-decoration:none; }
+  .nav-center { display:flex; gap:2rem; }
+  .nav-center a { font-family:'IBM Plex Mono', monospace; font-size:0.65rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-muted); text-decoration:none; transition:color 0.3s; }
+  .nav-center a:hover { color:var(--accent); }
+  .nav-right { display:flex; align-items:center; gap:1rem; }
+
+  /* Bouton Menu Hamburger */
+  .hamburger { display:none; flex-direction:column; justify-content:center; gap:5px; width:36px; height:36px; padding:6px; background:var(--surface); border:1px solid var(--border); border-radius:3px; cursor:pointer; transition:all 0.3s; flex-shrink:0; }
+  .hamburger span { display:block; width:100%; height:1.5px; background:var(--accent); border-radius:2px; transition:all 0.3s; transform-origin:center; }
+  .hamburger.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+
+  /* Tiroir de navigation mobile (Drawer) */
+  .nav-drawer { display:none; position:fixed; top:0; left:0; right:0; bottom:0; z-index:190; background:var(--nav-bg); backdrop-filter:blur(20px); flex-direction:column; align-items:center; justify-content:center; gap:2.5rem; padding:2rem; opacity:0; visibility:hidden; transition:opacity 0.3s, visibility 0.3s; }
+  .nav-drawer.open { opacity:1; visibility:visible; display:flex; }
+  .nav-drawer a { font-family:'IBM Plex Mono',monospace; font-size:1.1rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-muted); text-decoration:none; transition:color 0.3s, transform 0.3s; transform:translateY(10px); opacity:0; }
+  .nav-drawer.open a { transform:translateY(0); opacity:1; }
+  .nav-drawer a:hover { color:var(--accent); }
+  .nav-drawer-close { position:absolute; top:1.5rem; right:1.5rem; font-family:'IBM Plex Mono',monospace; font-size:0.8rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); background:none; border:none; cursor:pointer; }
+
+  /* Bouton de bascule de Thème */
+  .theme-btn { width:42px; height:22px; background:var(--surface); border:1px solid var(--border); border-radius:11px; cursor:pointer; position:relative; flex-shrink:0; transition:background 0.3s; }
+  .theme-btn::after { content:''; position:absolute; top:3px; left:3px; width:14px; height:14px; background:var(--accent); border-radius:50%; transition:transform 0.3s; }
+  [data-theme="light"] .theme-btn::after { transform:translateX(20px); }
+
+  /* Menu déroulant des Langues */
+  .lang-dropdown { position:relative; }
+  .lang-btn { display:flex; align-items:center; gap:0.5rem; padding:0.38rem 0.8rem; background:var(--surface); border:1px solid var(--border); border-radius:3px; cursor:pointer; font-family:'IBM Plex Mono', monospace; font-size:0.63rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); transition:all 0.3s; user-select:none; }
+  .lang-btn:hover, .lang-dropdown.open .lang-btn { border-color:var(--accent); color:var(--accent); }
+  .lang-btn .chevron { font-size:0.5rem; transition:transform 0.3s; margin-left:2px; }
+  .lang-dropdown.open .chevron { transform:rotate(180deg); }
+  
+  .lang-menu { position:absolute; top:calc(100% + 8px); right:0; background:var(--dropdown-bg); border:1px solid var(--border); border-radius:4px; overflow:hidden; min-width:155px; box-shadow:0 12px 40px rgba(0,0,0,0.3); opacity:0; visibility:hidden; transform:translateY(-6px); transition:all 0.25s ease; z-index:300;}
+  .lang-dropdown.open .lang-menu { opacity:1; visibility:visible; transform:translateY(0); }
+  .lang-option { display:flex; align-items:center; gap:0.75rem; padding:0.65rem 1rem; cursor:pointer; font-family:'IBM Plex Mono', monospace; font-size:0.63rem; letter-spacing:0.08em; color:var(--text-muted); transition:background 0.2s, color 0.2s; border-bottom:1px solid var(--border); }
+  .lang-option:last-child { border-bottom:none; }
+  .lang-option:hover { background:var(--dropdown-hover); color:var(--text); }
+  .lang-option.active { color:var(--accent); }
+  .lang-option .flag { font-size:1.1rem; }
+  .lang-option .lang-name { flex:1; }
+  .lang-option .lang-native { font-size:0.58rem; opacity:0.6; }
+
+  /* ZONE HERO */
+  .hero { min-height:100vh; display:grid; grid-template-columns:1fr 1fr; position:relative; overflow:hidden; padding-top:75px; }
+  .hero-bg { position:absolute; inset:0; background-size:cover; background-position:center top; background-repeat:no-repeat; }
+  .hero-bg::before { content:''; position:absolute; inset:0; background:linear-gradient(to right,rgba(5,15,10,0.88) 0%,rgba(5,15,10,0.6) 55%,rgba(5,15,10,0.82) 100%),var(--hero-grad); transition:background 0.4s; }
+  [data-theme="light"] .hero-bg::before { background:linear-gradient(to right,rgba(243,250,246,0.9) 0%,rgba(243,250,246,0.65) 55%,rgba(243,250,246,0.85) 100%),var(--hero-grad); }
+  
+  .circuit { position:absolute; bottom:0; right:0; width:350px; height:350px; opacity:0.06; }
+  [data-theme="light"] .circuit { opacity:0.04; }
+
+  .hero-left { display:flex; flex-direction:column; justify-content:center; padding:5rem 4rem 4rem; position:relative; z-index:2; }
+  .hero-eyebrow { font-family:'IBM Plex Mono', monospace; font-size:0.67rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent2); margin-bottom:1.4rem; display:flex; align-items:center; gap:0.9rem; animation:fadeInLeft 0.8s 0.3s both; }
+  .hero-eyebrow::before { content:''; display:block; width:36px; height:1px; background:var(--accent2); }
+  .hero-name { font-family:'Syne', sans-serif; font-size:clamp(2.8rem,5vw,5.2rem); font-weight:900; line-height:0.92; letter-spacing:-0.03em; color:var(--text); animation:fadeInLeft 0.8s 0.5s both; }
+  .hero-name span { color:var(--accent); display:block; font-weight:800; letter-spacing:-0.04em; }
+  .hero-title { font-family:'Outfit', sans-serif; font-size:clamp(0.9rem,1.7vw,1.25rem); font-weight:300; font-style:italic; color:var(--text-muted); margin:1.3rem 0 1.7rem; max-width:380px; line-height:1.65; animation:fadeInLeft 0.8s 0.65s both; }
+  
+  .hero-tags { display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:2.5rem; animation:fadeInLeft 0.8s 0.8s both; }
+  .tag { font-family:'IBM Plex Mono', monospace; font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase; padding:0.35rem 0.8rem; border:1px solid var(--border); color:var(--accent2); border-radius:2px; background:var(--tag-bg); transition:all 0.3s; }
+  .tag:hover { background:var(--accent); color:#050F0A; }
+  
+  .hero-cta { display:flex; gap:0.9rem; flex-wrap:wrap; animation:fadeInLeft 0.8s 0.95s both; }
+  .btn-primary { font-family:'IBM Plex Mono', monospace; font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; padding:0.8rem 1.75rem; background:var(--accent); color:#050F0A; border:none; cursor:pointer; text-decoration:none; font-weight:600; clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%); transition:all 0.3s; }
+  .btn-primary:hover { background:var(--accent2); color:#D8F5E8; transform:translateY(-2px); }
+  .btn-outline { font-family:'IBM Plex Mono', monospace; font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; padding:0.8rem 1.75rem; background:transparent; color:var(--text); border:1px solid var(--border); cursor:pointer; text-decoration:none; transition:all 0.3s; }
+  .btn-outline:hover { border-color:var(--accent); color:var(--accent); }
+
+  /* Carte de statistiques à droite */
+  .hero-right { display:flex; align-items:center; justify-content:center; position:relative; z-index:2; padding:5rem 4rem 4rem 2rem; animation:fadeInRight 0.8s 0.65s both; }
+  .hero-card { position:relative; width:285px; }
+  .floating-badge { position:absolute; top:-22px; right:-22px; width:84px; height:84px; animation:rotate 22s linear infinite; }
+  @keyframes rotate { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+  
+  .hero-card-inner { background:var(--card-bg); border:1px solid var(--border); padding:2.1rem; position:relative; overflow:hidden; backdrop-filter:blur(10px); transition:background 0.4s, border-color 0.4s; }
+  .hero-card-inner::before { content:''; position:absolute; top:0; left:0; width:100%; height:2px; background:linear-gradient(90deg,var(--accent2),var(--accent)); }
+  .hero-card-corner { position:absolute; bottom:-1px; right:-1px; width:34px; height:34px; border-left:1px solid var(--border); border-top:1px solid var(--border); background:var(--bg); transition:background 0.4s; }
+  
+  .stat-row { margin-bottom:1.2rem; }
+  .stat-label { font-family:'IBM Plex Mono', monospace; font-size:0.56rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-muted); margin-bottom:0.22rem; }
+  .stat-value { font-family:'Syne', sans-serif; font-size:1.65rem; font-weight:700; color:var(--accent); line-height:1; }
+  .stat-sub { font-size:0.7rem; color:var(--text-muted); margin-top:0.15rem; font-weight:300; }
+  .divider { height:1px; background:var(--border); margin:0.85rem 0; }
+  .location-tag { display:flex; align-items:center; gap:0.5rem; font-family:'IBM Plex Mono', monospace; font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-top:1.2rem; }
+  .dot { width:6px; height:6px; background:var(--accent); border-radius:50%; animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+  /* TYPOGRAPHIE DES SECTIONS */
+  section { padding:7rem 4rem; position:relative; z-index:1; }
+  .section-header { display:flex; align-items:baseline; gap:1.4rem; margin-bottom:3.5rem; }
+  .section-num { font-family:'IBM Plex Mono', monospace; font-size:0.6rem; letter-spacing:0.15em; color:var(--accent2); }
+  .section-title { font-family:'Syne', sans-serif; font-size:clamp(1.9rem,3.8vw,3rem); font-weight:900; color:var(--text); line-height:1; letter-spacing:-0.02em; transition:color 0.4s; }
+  .section-title em { color:var(--accent); font-style:italic; font-weight:700; }
+  .section-line { flex:1; height:1px; background:linear-gradient(90deg,var(--border),transparent); }
+
+  /* SECTION À PROPOS */
+  .about { background:var(--bg-alt); transition:background 0.4s; }
+  .about-grid { display:grid; grid-template-columns:1.2fr 1fr; gap:5rem; align-items:start; }
+  .about-text p { font-size:1rem; line-height:1.85; color:var(--text-dim); font-weight:300; margin-bottom:1.4rem; }
+  .about-text p strong { color:var(--accent); font-weight:500; }
+
+  /* BANNIÈRE SUPERIEURE */
+  .switch-banner { background:var(--surface); border-bottom:1px solid var(--border); padding:0.52rem 4rem; display:flex; align-items:center; justify-content:space-between; }
+  .switch-text { font-family:'IBM Plex Mono', monospace; font-size:0.57rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); }
+  .switch-link { font-family:'IBM Plex Mono', monospace; font-size:0.57rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); text-decoration:none; border:1px solid var(--border); padding:0.28rem 0.75rem; transition:all 0.3s; }
+  .switch-link:hover { background:var(--accent); color:#050F0A; }
+
+  /* ANIMATIONS DE CHARGEMENT */
+  @keyframes fadeInLeft { from{opacity:0; transform:translateX(-26px);} to{opacity:1; transform:translateX(0);} }
+  @keyframes fadeInRight { from{opacity:0; transform:translateX(26px);} to{opacity:1; transform:translateX(0);} }
+
+  /* DESIGN RESPONSIVE (MOBILE) */
+  @media(max-width:900px) {
+    nav { padding:1rem 1.5rem; }
+    .nav-center { display:none; }
+    .hamburger { display:flex; }
+    section { padding:5rem 1.5rem; }
+    .hero { grid-template-columns:1fr; }
+    .hero-left { padding:6rem 1.5rem 2rem; }
+    .hero-right { display:none; }
+    .about-grid { grid-template-columns:1fr; gap:2.5rem; }
+    .switch-banner { padding:0.52rem 1.5rem; }
+    .hero-name { font-size: clamp(2rem, 11vw, 3rem); line-height: 1; word-break: break-word; }
+    .hero-name span { font-size: inherit; }
+    .hero-title { font-size: clamp(0.85rem, 3.5vw, 1rem); max-width: 100%; }
+    .btn-primary, .btn-outline { width: 100%; text-align: center; font-size: 0.65rem; padding: 0.85rem 1rem; }
+  }
+  </style>
 </head>
 <body>
 
@@ -102,13 +243,13 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 <!-- MOBILE NAV DRAWER -->
 <div class="nav-drawer" id="navDrawer">
   <button class="nav-drawer-close" id="drawerClose">✕ Fermer</button>
-  <a href="#about"       data-i18n="nav_about"    onclick="closeDrawer()">À propos</a>
-  <a href="#competences" data-i18n="nav_skills"   onclick="closeDrawer()">Compétences</a>
-  <a href="#projets"     data-i18n="nav_projects" onclick="closeDrawer()">Projets</a>
-  <a href="#contact"     data-i18n="nav_contact"  onclick="closeDrawer()">Contact</a>
+  <a href="#about"       data-i18n="nav_about">À propos</a>
+  <a href="#competences" data-i18n="nav_skills">Compétences</a>
+  <a href="#projets"     data-i18n="nav_projects">Projets</a>
+  <a href="#contact"     data-i18n="nav_contact">Contact</a>
 </div>
 
-<!-- NAV -->
+<!-- NAV BAR -->
 <nav>
   <a href="#" class="nav-logo">&lt;M.K./&gt;</a>
   <div class="nav-center">
@@ -118,6 +259,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
     <a href="#contact"     data-i18n="nav_contact">Contact</a>
   </div>
   <div class="nav-right">
+    <!-- Dropdown langues -->
     <div class="lang-dropdown" id="langDropdown">
       <div class="lang-btn" id="langBtn">
         <span class="flag" id="currentFlag">🇫🇷</span>
@@ -130,15 +272,16 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
         <div class="lang-option" data-lang="ar"><span class="flag">🇸🇦</span><span class="lang-name">AR</span><span class="lang-native">العربية</span></div>
       </div>
     </div>
+    <!-- Thème Toggle -->
     <button class="theme-btn" id="themeToggle" aria-label="Toggle theme"></button>
-    <!-- Hamburger — visible mobile uniquement -->
+    <!-- Menu Hamburger -->
     <button class="hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- HERO SECTION -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-bg-grad"></div>
@@ -152,13 +295,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
     <line x1="120" y1="150" x2="220" y2="150" stroke="#00E676" stroke-width="0.5"/>
     <circle cx="220" cy="150" r="4" fill="#00E676" opacity="0.6"/>
     <line x1="220" y1="150" x2="220" y2="220" stroke="#00E676" stroke-width="0.5"/>
-    <line x1="80" y1="180" x2="160" y2="180" stroke="#00E676" stroke-width="0.5"/>
-    <circle cx="80" cy="180" r="3" fill="#00897B" opacity="0.5"/>
-    <line x1="160" y1="180" x2="160" y2="240" stroke="#00E676" stroke-width="0.5"/>
     <rect x="140" y="50" width="40" height="24" rx="2" stroke="#00897B" stroke-width="0.5" opacity="0.4"/>
-    <rect x="50" y="200" width="30" height="30" rx="2" stroke="#00897B" stroke-width="0.5" opacity="0.4"/>
-    <circle cx="250" cy="60" r="15" stroke="#00E676" stroke-width="0.5" opacity="0.3"/>
-    <circle cx="250" cy="60" r="7" stroke="#00E676" stroke-width="0.5" opacity="0.5"/>
   </svg>
 
   <div class="hero-left">
@@ -170,7 +307,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
       <span class="tag">WordPress</span>
       <span class="tag">Wave · Orange Money</span>
       <span class="tag" data-i18n="tag_exp">6+ projets livrés</span>
-      <span class="tag">Marché local</span>
     </div>
     <div class="hero-cta">
       <a href="#projets" class="btn-primary" data-i18n="cta_projects">Voir mes projets</a>
@@ -200,11 +336,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
           <div class="stat-sub">WordPress · WooCommerce</div>
         </div>
         <div class="divider"></div>
-        <div class="stat-row">
-          <div class="stat-label" data-i18n="card_market_label">Marché cible</div>
-          <div class="stat-value">🇸🇳</div>
-          <div class="stat-sub" data-i18n="card_market_sub">solutions 100% locales</div>
-        </div>
         <div class="location-tag">
           <span class="dot"></span>
           <span data-i18n="location">Rao, Saint-Louis — Sénégal</span>
@@ -215,22 +346,79 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   </div>
 </section>
 
-<!-- ABOUT -->
+<!-- ABOUT SECTION -->
 <section class="about" id="about">
   <div class="section-header">
     <span class="section-num">01</span>
     <h2 class="section-title"><span data-i18n="about_t1">Qui suis-</span><em data-i18n="about_t2">je</em> ?</h2>
     <div class="section-line"></div>
   </div>
-[...] 
+  <div class="about-grid">
+    <div class="about-text">
+      <p data-i18n="about_p1">Développeur web freelance basé à Rao, je conçois des sites et applications <strong>PHP/MySQL et WordPress</strong> adaptés aux réalités du marché sénégalais. Chaque projet est livré clé en main : maquettes, code, panneau admin, déploiement et documentation.</p>
+      <p data-i18n="about_p2">Ma spécialité : intégrer les passerelles de paiement <strong>Wave et Orange Money</strong> pour digitaliser efficacement le commerce local et les plateformes de services.</p>
+    </div>
+  </div>
+</section>
 
-<footer>
-  <span class="footer-copy">© 2025 Mouhameth Konaté — Rao, Saint-Louis, Sénégal</span>
-  <span class="footer-sig" data-i18n="footer_sig">Code · PHP · WordPress</span>
-</footer>
+<!-- ===== SCRIPT LOGIQUE INTERACTIVE ===== -->
+<script>
+  // 1. GESTION DU THÈME CLAIR / SOMBRE
+  const themeToggle = document.getElementById('themeToggle');
+  themeToggle.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+  });
 
-<!-- External scripts -->
-<script src="js/translations.js"></script>
-<script src="js/app.js"></script>
+  // 2. GESTION DU DROPDOWN DES LANGUES
+  const langDropdown = document.getElementById('langDropdown');
+  const langBtn = document.getElementById('langBtn');
+  langBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    langDropdown.classList.toggle('open');
+  });
+  document.addEventListener('click', () => langDropdown.classList.remove('open'));
+
+  // Changement cosmétique visuel des options du menu langue
+  const options = document.querySelectorAll('.lang-option');
+  options.forEach(opt => {
+    opt.addEventListener('click', function() {
+      options.forEach(o => o.classList.remove('active'));
+      this.classList.add('active');
+      document.getElementById('currentFlag').innerText = this.querySelector('.flag').innerText;
+      document.getElementById('currentLangLabel').innerText = this.querySelector('.lang-name').innerText;
+      
+      // Aligne la direction d'écriture si Arabe séléctionné
+      const selectedLang = this.getAttribute('data-lang');
+      document.documentElement.setAttribute('lang', selectedLang);
+      document.documentElement.setAttribute('dir', selectedLang === 'ar' ? 'rtl' : 'ltr');
+    });
+  });
+
+  // 3. GESTION DU MENU MOBILE (HAMBURGER)
+  const hamburger = document.getElementById('hamburger');
+  const navDrawer = document.getElementById('navDrawer');
+  const drawerClose = document.getElementById('drawerClose');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navDrawer.classList.toggle('open');
+  });
+
+  drawerClose.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    navDrawer.classList.remove('open');
+  });
+
+  // Ferme le menu mobile si on clique sur un lien interne
+  navDrawer.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navDrawer.classList.remove('open');
+    });
+  });
+</script>
+
 </body>
 </html>
