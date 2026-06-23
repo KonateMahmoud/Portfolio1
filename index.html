@@ -282,6 +282,37 @@ footer{padding:1.7rem 4rem;border-top:1px solid var(--border);display:flex;justi
   .projects-grid{grid-template-columns:1fr;}
   footer{flex-direction:column;gap:0.8rem;text-align:center;padding:1.5rem;}
   .switch-banner{padding:0.55rem 1.5rem;}
+  /* ── Hero mobile fixes ── */
+  .hero-name{
+    font-size: clamp(2rem, 11vw, 3rem);
+    line-height: 1;
+    word-break: break-word;
+  }
+  .hero-name span{ font-size: inherit; }
+  .hero-title{
+    font-size: clamp(0.85rem, 3.5vw, 1rem);
+    max-width: 100%;
+  }
+  .hero-tags{
+    gap: 0.4rem;
+    overflow-x: hidden;
+  }
+  .tag{
+    font-size: 0.55rem;
+    padding: 0.3rem 0.65rem;
+    white-space: nowrap;
+  }
+  .hero-cta{
+    flex-direction: column;
+    width: 100%;
+  }
+  .btn-primary, .btn-outline{
+    width: 100%;
+    text-align: center;
+    font-size: 0.65rem;
+    padding: 0.85rem 1rem;
+  }
+
 }
 </style>
 </head>
