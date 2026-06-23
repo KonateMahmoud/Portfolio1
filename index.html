@@ -3,566 +3,307 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mouhameth Konaté — Développeur & Entrepreneur</title>
+<title>Mouhameth Konaté — Développeur Web PHP & WordPress</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&family=Noto+Sans+Arabic:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&family=Noto+Sans+Arabic:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-/* ===== TOKENS ===== */
+/* ===== OPTION G — VERT MATRIX & NOIR ===== */
 :root {
-  --clay:       #C4884A;
-  --terracotta: #B5522A;
-  --baobab:     #2D4A1E;
-  --gold:       #D4A017;
+  --accent:      #00E676;
+  --accent2:     #00897B;
+  --accent-soft: rgba(0,230,118,0.12);
 }
 [data-theme="dark"] {
-  --bg:          #0F1A0A;
-  --bg-alt:      #131F0D;
-  --surface:     rgba(45,74,30,0.18);
-  --border:      rgba(196,136,74,0.22);
-  --text:        #F5EDD8;
-  --text-muted:  #8A9E7A;
-  --text-dim:    rgba(245,237,216,0.55);
-  --card-bg:     rgba(15,26,10,0.7);
-  --nav-bg:      rgba(15,26,10,0.93);
-  --stat-bg:     rgba(45,74,30,0.25);
-  --stat-border: rgba(45,74,30,0.7);
-  --tag-bg:      rgba(196,136,74,0.1);
+  --bg:          #050F0A;
+  --bg-alt:      #071510;
+  --surface:     rgba(0,230,118,0.06);
+  --border:      rgba(0,230,118,0.18);
+  --text:        #D8F5E8;
+  --text-muted:  #4AAA78;
+  --text-dim:    rgba(216,245,232,0.5);
+  --card-bg:     rgba(0,230,118,0.04);
+  --nav-bg:      rgba(5,15,10,0.94);
+  --stat-bg:     rgba(0,230,118,0.07);
+  --stat-border: rgba(0,230,118,0.25);
+  --tag-bg:      rgba(0,230,118,0.07);
+  --dropdown-bg: #071A10;
+  --dropdown-hover: rgba(0,230,118,0.1);
   --hero-grad:
-    radial-gradient(ellipse 80% 60% at 70% 50%, rgba(196,136,74,0.11) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 80% at 20% 80%, rgba(45,74,30,0.38) 0%, transparent 60%);
-  --dropdown-bg: #1A2D12;
-  --dropdown-hover: rgba(196,136,74,0.12);
+    radial-gradient(ellipse 80% 60% at 70% 50%, rgba(0,230,118,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 80% at 15% 80%, rgba(0,137,123,0.15) 0%, transparent 60%);
+  --glow: rgba(0,230,118,0.06);
 }
 [data-theme="light"] {
-  --bg:          #FAF6EE;
-  --bg-alt:      #F3ECE0;
-  --surface:     rgba(196,136,74,0.07);
-  --border:      rgba(181,82,42,0.2);
-  --text:        #1C1208;
-  --text-muted:  #7A6040;
-  --text-dim:    rgba(28,18,8,0.55);
-  --card-bg:     rgba(255,255,255,0.85);
-  --nav-bg:      rgba(250,246,238,0.96);
-  --stat-bg:     rgba(45,74,30,0.07);
-  --stat-border: rgba(45,74,30,0.22);
-  --tag-bg:      rgba(196,136,74,0.12);
+  --bg:          #F3FAF6;
+  --bg-alt:      #E8F5EE;
+  --surface:     rgba(0,137,123,0.07);
+  --border:      rgba(0,137,123,0.2);
+  --text:        #071A10;
+  --text-muted:  #1A7A50;
+  --text-dim:    rgba(7,26,16,0.55);
+  --card-bg:     rgba(255,255,255,0.92);
+  --nav-bg:      rgba(243,250,246,0.96);
+  --stat-bg:     rgba(0,137,123,0.07);
+  --stat-border: rgba(0,137,123,0.25);
+  --tag-bg:      rgba(0,168,84,0.08);
+  --dropdown-bg: #E4F5EC;
+  --dropdown-hover: rgba(0,168,84,0.1);
   --hero-grad:
-    radial-gradient(ellipse 80% 60% at 70% 50%, rgba(196,136,74,0.08) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 80% at 20% 80%, rgba(45,74,30,0.08) 0%, transparent 60%);
-  --dropdown-bg: #FFF8EE;
-  --dropdown-hover: rgba(196,136,74,0.1);
+    radial-gradient(ellipse 80% 60% at 70% 50%, rgba(0,230,118,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 80% at 15% 80%, rgba(0,137,123,0.06) 0%, transparent 60%);
+  --glow: rgba(0,230,118,0.05);
 }
 
-/* Arabic font override */
-[lang="ar"] body, [lang="ar"] * {
-  font-family: 'Noto Sans Arabic', 'Outfit', sans-serif !important;
-}
+/* Arabic */
+[lang="ar"] body,[lang="ar"] p,
+[lang="ar"] h1,[lang="ar"] h2,[lang="ar"] h3,
+[lang="ar"] .hero-title,[lang="ar"] .domain-desc,
+[lang="ar"] .project-desc,[lang="ar"] .about-text p,
+[lang="ar"] .contact-intro { font-family:'Noto Sans Arabic','Outfit',sans-serif; }
 
-/* RTL support */
+/* RTL */
 [dir="rtl"] .hero-eyebrow::before { display:none; }
-[dir="rtl"] .hero-eyebrow::after {
-  content:''; display:block;
-  width:38px; height:1px; background:var(--clay);
-}
-[dir="rtl"] .section-line {
-  background:linear-gradient(270deg, var(--border), transparent);
-}
-[dir="rtl"] .domain-card { border-left:none; border-right:2px solid var(--clay); }
-[dir="rtl"] .domain-card:hover { border-right-color:var(--gold); transform:translateX(-5px); }
-[dir="rtl"] .skill-fill { transform-origin: right; }
+[dir="rtl"] .hero-eyebrow::after { content:'';display:block;width:38px;height:1px;background:var(--accent2); }
+[dir="rtl"] .section-line { background:linear-gradient(270deg,var(--border),transparent); }
+[dir="rtl"] .domain-card { border-left:none;border-right:2px solid var(--accent2); }
+[dir="rtl"] .domain-card:hover { border-right-color:var(--accent);transform:translateX(-5px); }
+[dir="rtl"] .skill-fill { transform-origin:right; }
 
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-body {
-  background:var(--bg);
-  color:var(--text);
-  font-family:'Outfit', sans-serif;
-  overflow-x:hidden;
-  cursor:none;
-  transition:background 0.4s, color 0.4s;
-}
-body::before {
-  content:'';
-  position:fixed; inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events:none; z-index:1000; opacity:0.3;
-}
-.cursor {
-  position:fixed; top:0; left:0;
-  width:11px; height:11px;
-  background:var(--gold); border-radius:50%;
-  pointer-events:none; z-index:9999;
-  transform:translate(-50%,-50%);
-  transition:transform 0.12s, background 0.3s;
-  mix-blend-mode:multiply;
-}
-.cursor-ring {
-  position:fixed; top:0; left:0;
-  width:34px; height:34px;
-  border:1.5px solid var(--clay); border-radius:50%;
-  pointer-events:none; z-index:9998;
-  transform:translate(-50%,-50%);
-  transition:border-color 0.3s;
-}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 
-/* ===== NAV ===== */
-nav {
-  position:fixed; top:0; left:0; right:0; z-index:200;
-  display:flex; justify-content:space-between; align-items:center;
-  padding:1.3rem 4rem;
-  background:var(--nav-bg);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--border);
-  transition:background 0.4s, border-color 0.4s;
+  a,button,.project-card,.domain-card,.lang-option,.lang-btn,
+  .theme-btn,.btn-primary,.btn-outline,.qr-download-btn{}
 }
-.nav-logo {
-  font-family:'Playfair Display',serif;
-  font-size:1.3rem; font-weight:900; letter-spacing:-0.02em;
-  color:var(--gold); text-decoration:none;
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;overflow-x:hidden;transition:background 0.4s,color 0.4s;}
+
+  a,button,.project-card,.domain-card,.lang-option,.lang-btn,
+  .theme-btn,.btn-primary,.btn-outline,.qr-download-btn{}
 }
-.nav-center { display:flex; gap:2rem; }
-.nav-center a {
-  font-family:'DM Mono',monospace;
-  font-size:0.66rem; letter-spacing:0.14em; text-transform:uppercase;
-  color:var(--text-muted); text-decoration:none; transition:color 0.3s;
-}
-.nav-center a:hover { color:var(--gold); }
-.nav-right { display:flex; align-items:center; gap:1rem; }
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:0.25;}
+
+
+
+/* Glow BG */
+.bg-glow{position:fixed;top:20%;right:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,var(--glow) 0%,transparent 70%);pointer-events:none;z-index:0;}
+.bg-glow2{position:fixed;bottom:-5%;left:-5%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,var(--glow) 0%,transparent 70%);pointer-events:none;z-index:0;}
+
+/* Scanline */
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,230,118,0.012) 3px,rgba(0,230,118,0.012) 4px);pointer-events:none;z-index:999;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 4rem;background:var(--nav-bg);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);transition:background 0.4s,border-color 0.4s;}
+.nav-logo{font-family:'Syne', sans-serif;font-size:1.3rem;font-weight:900;letter-spacing:-0.02em;color:var(--accent);text-decoration:none;}
+.nav-center{display:flex;gap:2rem;}
+.nav-center a{font-family:'IBM Plex Mono', monospace;font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;transition:color 0.3s;}
+.nav-center a:hover{color:var(--accent);}
+.nav-right{display:flex;align-items:center;gap:1rem;}
 
 /* Theme toggle */
-.theme-btn {
-  width:42px; height:22px;
-  background:var(--surface);
-  border:1px solid var(--border); border-radius:11px;
-  cursor:none; position:relative; flex-shrink:0;
-  transition:background 0.3s;
-}
-.theme-btn::after {
-  content:''; position:absolute; top:3px; left:3px;
-  width:14px; height:14px;
-  background:var(--gold); border-radius:50%;
-  transition:transform 0.3s;
-}
-[data-theme="light"] .theme-btn::after { transform:translateX(20px); }
+.theme-btn{width:42px;height:22px;background:var(--surface);border:1px solid var(--border);border-radius:11px;cursor:pointer;position:relative;flex-shrink:0;transition:background 0.3s;}
+.theme-btn::after{content:'';position:absolute;top:3px;left:3px;width:14px;height:14px;background:var(--accent);border-radius:50%;transition:transform 0.3s;}
+[data-theme="light"] .theme-btn::after{transform:translateX(20px);}
 
-/* ===== LANG DROPDOWN ===== */
-.lang-dropdown {
-  position:relative;
-}
-.lang-btn {
-  display:flex; align-items:center; gap:0.5rem;
-  padding:0.4rem 0.85rem;
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:3px;
-  cursor:none;
-  font-family:'DM Mono',monospace;
-  font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase;
-  color:var(--text-muted);
-  transition:all 0.3s;
-  user-select:none;
-}
-.lang-btn:hover { border-color:var(--gold); color:var(--gold); }
-.lang-btn .flag { font-size:0.95rem; line-height:1; }
-.lang-btn .chevron {
-  font-size:0.5rem; transition:transform 0.3s;
-  margin-left:2px;
-}
-.lang-dropdown.open .lang-btn { border-color:var(--gold); color:var(--gold); }
-.lang-dropdown.open .chevron { transform:rotate(180deg); }
+/* Lang dropdown */
+.lang-dropdown{position:relative;}
+.lang-btn{display:flex;align-items:center;gap:0.5rem;padding:0.38rem 0.8rem;background:var(--surface);border:1px solid var(--border);border-radius:3px;cursor:pointer;font-family:'IBM Plex Mono', monospace;font-size:0.63rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);transition:all 0.3s;user-select:none;}
+.lang-btn:hover,.lang-dropdown.open .lang-btn{border-color:var(--accent);color:var(--accent);}
+.lang-btn .chevron{font-size:0.5rem;transition:transform 0.3s;margin-left:2px;}
+.lang-dropdown.open .chevron{transform:rotate(180deg);}
+.lang-menu{position:absolute;top:calc(100% + 8px);right:0;background:var(--dropdown-bg);border:1px solid var(--border);border-radius:4px;overflow:hidden;min-width:155px;box-shadow:0 12px 40px rgba(0,0,0,0.3);opacity:0;visibility:hidden;transform:translateY(-6px);transition:all 0.25s ease;z-index:300;}
+[dir="rtl"] .lang-menu{right:auto;left:0;}
+.lang-dropdown.open .lang-menu{opacity:1;visibility:visible;transform:translateY(0);}
+.lang-option{display:flex;align-items:center;gap:0.75rem;padding:0.65rem 1rem;cursor:pointer;font-family:'IBM Plex Mono', monospace;font-size:0.63rem;letter-spacing:0.08em;color:var(--text-muted);transition:background 0.2s,color 0.2s;border-bottom:1px solid var(--border);}
+.lang-option:last-child{border-bottom:none;}
+.lang-option:hover{background:var(--dropdown-hover);color:var(--text);}
+.lang-option.active{color:var(--accent);}
+.lang-option .flag{font-size:1.1rem;}
+.lang-option .lang-name{flex:1;}
+.lang-option .lang-native{font-size:0.58rem;opacity:0.6;}
 
-.lang-menu {
-  position:absolute; top:calc(100% + 8px);
-  right:0;
-  background:var(--dropdown-bg);
-  border:1px solid var(--border);
-  border-radius:4px;
-  overflow:hidden;
-  min-width:160px;
-  box-shadow:0 12px 40px rgba(0,0,0,0.25);
-  opacity:0; visibility:hidden; transform:translateY(-6px);
-  transition:all 0.25s ease;
-  z-index:300;
-}
-[dir="rtl"] .lang-menu { right:auto; left:0; }
-.lang-dropdown.open .lang-menu {
-  opacity:1; visibility:visible; transform:translateY(0);
-}
-.lang-option {
-  display:flex; align-items:center; gap:0.75rem;
-  padding:0.7rem 1rem;
-  cursor:none;
-  font-family:'DM Mono',monospace;
-  font-size:0.65rem; letter-spacing:0.08em;
-  color:var(--text-muted);
-  transition:background 0.2s, color 0.2s;
-  border-bottom:1px solid var(--border);
-}
-.lang-option:last-child { border-bottom:none; }
-.lang-option:hover { background:var(--dropdown-hover); color:var(--text); }
-.lang-option.active { color:var(--gold); }
-.lang-option .flag { font-size:1.1rem; }
-.lang-option .lang-name { flex:1; }
-.lang-option .lang-native { color:var(--text-muted); font-size:0.6rem; opacity:0.7; }
-.lang-option.active .lang-native { color:var(--gold); opacity:0.8; }
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden;padding-top:75px;}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center top;background-repeat:no-repeat;}
+.hero-bg::before{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(5,15,10,0.88) 0%,rgba(5,15,10,0.6) 55%,rgba(5,15,10,0.82) 100%),var(--hero-grad);transition:background 0.4s;}
+[data-theme="light"] .hero-bg::before{background:linear-gradient(to right,rgba(243,250,246,0.9) 0%,rgba(243,250,246,0.65) 55%,rgba(243,250,246,0.85) 100%),var(--hero-grad);}
+.hero-bg-grad{position:absolute;inset:0;background:var(--hero-grad);pointer-events:none;}
 
-/* ===== HERO ===== */
-.hero {
-  min-height:100vh;
-  display:grid; grid-template-columns:1fr 1fr;
-  position:relative; overflow:hidden;
-  padding-top:80px;
-}
-.hero-bg {
-  position:absolute; inset:0;
-  background-size:cover;
-  background-position:center top;
-  background-repeat:no-repeat;
-  transition:background 0.4s;
-}
-/* Overlay sombre sur la photo (dark mode) */
-.hero-bg::before {
-  content:'';
-  position:absolute; inset:0;
-  background:
-    linear-gradient(to right, rgba(15,26,10,0.82) 0%, rgba(15,26,10,0.55) 55%, rgba(15,26,10,0.75) 100%),
-    var(--hero-grad);
-  transition:background 0.4s;
-}
-/* Overlay plus clair en light mode */
-[data-theme="light"] .hero-bg::before {
-  background:
-    linear-gradient(to right, rgba(250,246,238,0.88) 0%, rgba(250,246,238,0.6) 55%, rgba(250,246,238,0.78) 100%),
-    var(--hero-grad);
-}
-.baobab-svg {
-  position:absolute; bottom:0; right:4%;
-  width:260px; opacity:0.06;
-  animation:sway 9s ease-in-out infinite;
-}
-[dir="rtl"] .baobab-svg { right:auto; left:4%; }
-[data-theme="light"] .baobab-svg { opacity:0.04; }
-@keyframes sway { 0%,100%{transform:rotate(-1deg);} 50%{transform:rotate(1deg) translateX(4px);} }
+/* Circuit decoration */
+.circuit{position:absolute;bottom:0;right:0;width:350px;height:350px;opacity:0.06;}
+[data-theme="light"] .circuit{opacity:0.04;}
 
-.hero-left {
-  display:flex; flex-direction:column; justify-content:center;
-  padding:5rem 4rem 4rem;
-  position:relative; z-index:2;
-}
-.hero-eyebrow {
-  font-family:'DM Mono',monospace;
-  font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase;
-  color:var(--clay); margin-bottom:1.5rem;
-  display:flex; align-items:center; gap:0.9rem;
-  animation:fadeInLeft 0.8s 0.3s both;
-}
-.hero-eyebrow::before {
-  content:''; display:block;
-  width:38px; height:1px; background:var(--clay);
-}
-.hero-name {
-  font-family:'Playfair Display',serif;
-  font-size:clamp(3rem,5.5vw,5.5rem);
-  font-weight:900; line-height:0.92;
-  letter-spacing:-0.03em; color:var(--text);
-  animation:fadeInLeft 0.8s 0.5s both;
-}
-.hero-name span { color:var(--gold); display:block; font-style:italic; }
-.hero-title {
-  font-family:'Playfair Display',serif;
-  font-size:clamp(0.95rem,1.8vw,1.3rem);
-  font-weight:400; font-style:italic;
-  color:var(--text-muted);
-  margin:1.4rem 0 1.8rem; max-width:380px; line-height:1.65;
-  animation:fadeInLeft 0.8s 0.65s both;
-}
-.hero-tags {
-  display:flex; flex-wrap:wrap; gap:0.55rem; margin-bottom:2.8rem;
-  animation:fadeInLeft 0.8s 0.8s both;
-}
-.tag {
-  font-family:'DM Mono',monospace;
-  font-size:0.62rem; letter-spacing:0.1em; text-transform:uppercase;
-  padding:0.38rem 0.85rem;
-  border:1px solid var(--border);
-  color:var(--clay); border-radius:2px; background:var(--tag-bg);
-  transition:all 0.3s;
-}
-.tag:hover { background:var(--clay); color:#fff; }
-.hero-cta {
-  display:flex; gap:0.9rem; flex-wrap:wrap;
-  animation:fadeInLeft 0.8s 0.95s both;
-}
-.btn-primary {
-  font-family:'DM Mono',monospace;
-  font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase;
-  padding:0.82rem 1.8rem;
-  background:var(--gold); color:#0F1A0A;
-  border:none; cursor:none; text-decoration:none; font-weight:500;
-  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%);
-  transition:all 0.3s;
-}
-.btn-primary:hover { background:var(--clay); transform:translateY(-2px); }
-.btn-outline {
-  font-family:'DM Mono',monospace;
-  font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase;
-  padding:0.82rem 1.8rem;
-  background:transparent; color:var(--text);
-  border:1px solid var(--border); cursor:none; text-decoration:none;
-  transition:all 0.3s;
-}
-.btn-outline:hover { border-color:var(--gold); color:var(--gold); }
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:5rem 4rem 4rem;position:relative;z-index:2;}
+.hero-eyebrow{font-family:'IBM Plex Mono', monospace;font-size:0.67rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:1.4rem;display:flex;align-items:center;gap:0.9rem;animation:fadeInLeft 0.8s 0.3s both;}
+.hero-eyebrow::before{content:'';display:block;width:36px;height:1px;background:var(--accent2);}
+.hero-name{font-family:'Syne', sans-serif;font-size:clamp(2.8rem,5vw,5.2rem);font-weight:900;line-height:0.92;letter-spacing:-0.03em;color:var(--text);animation:fadeInLeft 0.8s 0.5s both;}
+.hero-name span{color:var(--accent);display:block;font-weight:800;letter-spacing:-0.04em;}
+.hero-title{font-family:'Outfit', sans-serif;font-size:clamp(0.9rem,1.7vw,1.25rem);font-weight:300;font-style:italic;color:var(--text-muted);margin:1.3rem 0 1.7rem;max-width:380px;line-height:1.65;animation:fadeInLeft 0.8s 0.65s both;}
+.hero-tags{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:2.5rem;animation:fadeInLeft 0.8s 0.8s both;}
+.tag{font-family:'IBM Plex Mono', monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.35rem 0.8rem;border:1px solid var(--border);color:var(--accent2);border-radius:2px;background:var(--tag-bg);transition:all 0.3s;}
+.tag:hover{background:var(--accent);color:#050F0A;}
+.hero-cta{display:flex;gap:0.9rem;flex-wrap:wrap;animation:fadeInLeft 0.8s 0.95s both;}
+.btn-primary{font-family:'IBM Plex Mono', monospace;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.8rem 1.75rem;background:var(--accent);color:#050F0A;border:none;cursor:pointer;text-decoration:none;font-weight:600;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%);transition:all 0.3s;}
+.btn-primary:hover{background:var(--accent2);color:#D8F5E8;transform:translateY(-2px);}
+.btn-outline{font-family:'IBM Plex Mono', monospace;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.8rem 1.75rem;background:transparent;color:var(--text);border:1px solid var(--border);cursor:pointer;text-decoration:none;transition:all 0.3s;}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent);}
 
 /* Hero right */
-.hero-right {
-  display:flex; align-items:center; justify-content:center;
-  position:relative; z-index:2; padding:5rem 4rem 4rem 2rem;
-  animation:fadeInRight 0.8s 0.65s both;
-}
-.hero-card { position:relative; width:290px; }
-.floating-badge {
-  position:absolute; top:-22px; right:-22px;
-  width:86px; height:86px;
-  animation:rotate 22s linear infinite;
-}
-[dir="rtl"] .floating-badge { right:auto; left:-22px; }
+.hero-right{display:flex;align-items:center;justify-content:center;position:relative;z-index:2;padding:5rem 4rem 4rem 2rem;animation:fadeInRight 0.8s 0.65s both;}
+.hero-card{position:relative;width:285px;}
+.floating-badge{position:absolute;top:-22px;right:-22px;width:84px;height:84px;animation:rotate 22s linear infinite;}
 @keyframes rotate{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
-.hero-card-inner {
-  background:var(--card-bg); border:1px solid var(--border);
-  padding:2.2rem; position:relative; overflow:hidden;
-  backdrop-filter:blur(10px); transition:background 0.4s, border-color 0.4s;
-}
-.hero-card-inner::before {
-  content:''; position:absolute; top:0; left:0;
-  width:100%; height:3px;
-  background:linear-gradient(90deg,var(--terracotta),var(--gold));
-}
-.hero-card-corner {
-  position:absolute; bottom:-1px; right:-1px;
-  width:36px; height:36px;
-  border-left:1px solid var(--border);
-  border-top:1px solid var(--border);
-  background:var(--bg); transition:background 0.4s;
-}
-.stat-row { margin-bottom:1.3rem; }
-.stat-label {
-  font-family:'DM Mono',monospace;
-  font-size:0.58rem; letter-spacing:0.15em; text-transform:uppercase;
-  color:var(--text-muted); margin-bottom:0.25rem;
-}
-.stat-value {
-  font-family:'Playfair Display',serif;
-  font-size:1.7rem; font-weight:700; color:var(--gold); line-height:1;
-}
-.stat-sub { font-size:0.72rem; color:var(--text-muted); margin-top:0.18rem; font-weight:300; }
-.divider { height:1px; background:var(--border); margin:0.9rem 0; }
-.location-tag {
-  display:flex; align-items:center; gap:0.5rem;
-  font-family:'DM Mono',monospace;
-  font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase;
-  color:var(--text-muted); margin-top:1.3rem;
-}
-.dot { width:6px; height:6px; background:var(--clay); border-radius:50%; animation:pulse 2s infinite; }
+.hero-card-inner{background:var(--card-bg);border:1px solid var(--border);padding:2.1rem;position:relative;overflow:hidden;backdrop-filter:blur(10px);transition:background 0.4s,border-color 0.4s;}
+.hero-card-inner::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--accent2),var(--accent));}
+.hero-card-corner{position:absolute;bottom:-1px;right:-1px;width:34px;height:34px;border-left:1px solid var(--border);border-top:1px solid var(--border);background:var(--bg);transition:background 0.4s;}
+.stat-row{margin-bottom:1.2rem;}
+.stat-label{font-family:'IBM Plex Mono', monospace;font-size:0.56rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.22rem;}
+.stat-value{font-family:'Syne', sans-serif;font-size:1.65rem;font-weight:700;color:var(--accent);line-height:1;}
+.stat-sub{font-size:0.7rem;color:var(--text-muted);margin-top:0.15rem;font-weight:300;}
+.divider{height:1px;background:var(--border);margin:0.85rem 0;}
+.location-tag{display:flex;align-items:center;gap:0.5rem;font-family:'IBM Plex Mono', monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-top:1.2rem;}
+.dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
 
-/* ===== SECTION SHARED ===== */
-section { padding:7rem 4rem; }
-.section-header { display:flex; align-items:baseline; gap:1.4rem; margin-bottom:3.5rem; }
-.section-num {
-  font-family:'DM Mono',monospace;
-  font-size:0.62rem; letter-spacing:0.15em; color:var(--clay);
-}
-.section-title {
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2rem,4vw,3.2rem);
-  font-weight:900; color:var(--text);
-  line-height:1; letter-spacing:-0.02em; transition:color 0.4s;
-}
-.section-title em { color:var(--gold); font-style:italic; }
-.section-line { flex:1; height:1px; background:linear-gradient(90deg,var(--border),transparent); }
+/* SECTIONS */
+section{padding:7rem 4rem;position:relative;z-index:1;}
+.section-header{display:flex;align-items:baseline;gap:1.4rem;margin-bottom:3.5rem;}
+.section-num{font-family:'IBM Plex Mono', monospace;font-size:0.6rem;letter-spacing:0.15em;color:var(--accent2);}
+.section-title{font-family:'Syne', sans-serif;font-size:clamp(1.9rem,3.8vw,3rem);font-weight:900;color:var(--text);line-height:1;letter-spacing:-0.02em;transition:color 0.4s;}
+.section-title em{color:var(--accent);font-style:italic;font-weight:700;}
+.section-line{flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);}
 
-/* ===== ABOUT ===== */
-.about { background:var(--bg-alt); transition:background 0.4s; }
-.about-grid { display:grid; grid-template-columns:1.2fr 1fr; gap:5rem; align-items:start; }
-.about-text p { font-size:1rem; line-height:1.85; color:var(--text-dim); font-weight:300; margin-bottom:1.4rem; }
-.about-text p strong { color:var(--gold); font-weight:500; }
-.about-domains { display:flex; flex-direction:column; gap:1.3rem; margin-top:1rem; }
-.domain-card {
-  border-left:2px solid var(--clay); padding:1.1rem 1.4rem;
-  background:var(--surface); transition:all 0.3s;
-}
-.domain-card:hover { border-left-color:var(--gold); background:rgba(196,136,74,0.12); transform:translateX(5px); }
-.domain-icon { font-size:1.4rem; margin-bottom:0.4rem; }
-.domain-title { font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; color:var(--text); margin-bottom:0.25rem; }
-.domain-desc { font-size:0.8rem; color:var(--text-muted); line-height:1.6; font-weight:300; }
+/* ABOUT */
+.about{background:var(--bg-alt);transition:background 0.4s;}
+.about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:5rem;align-items:start;}
+.about-text p{font-size:1rem;line-height:1.85;color:var(--text-dim);font-weight:300;margin-bottom:1.4rem;}
+.about-text p strong{color:var(--accent);font-weight:500;}
+.about-domains{display:flex;flex-direction:column;gap:1.2rem;margin-top:0.5rem;}
+.domain-card{border-left:2px solid var(--accent2);padding:1.1rem 1.4rem;background:var(--surface);transition:all 0.3s;}
+.domain-card:hover{border-left-color:var(--accent);background:var(--accent-soft);transform:translateX(5px);}
+.domain-icon{font-size:1.35rem;margin-bottom:0.35rem;}
+.domain-title{font-family:'Syne', sans-serif;font-size:1rem;font-weight:700;color:var(--text);margin-bottom:0.22rem;}
+.domain-desc{font-size:0.78rem;color:var(--text-muted);line-height:1.6;font-weight:300;}
 
-/* ===== SKILLS ===== */
-.skills-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
-.skill-group-title {
-  font-family:'DM Mono',monospace;
-  font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase;
-  color:var(--clay); margin-bottom:1.1rem;
-  padding-bottom:0.7rem; border-bottom:1px solid var(--border);
-}
-.skill-item {
-  display:flex; justify-content:space-between; align-items:center;
-  padding:0.55rem 0; border-bottom:1px solid rgba(196,136,74,0.06);
-}
-.skill-name { font-size:0.82rem; color:var(--text); font-weight:400; }
-.skill-bar { width:78px; height:2px; background:var(--border); position:relative; overflow:hidden; }
-.skill-fill {
-  position:absolute; left:0; top:0; height:100%;
-  background:linear-gradient(90deg,var(--terracotta),var(--gold));
-  transform:scaleX(0); transform-origin:left;
-  transition:transform 1.2s ease;
-}
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;}
+.skill-group-title{font-family:'IBM Plex Mono', monospace;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:1rem;padding-bottom:0.65rem;border-bottom:1px solid var(--border);}
+.skill-item{display:flex;justify-content:space-between;align-items:center;padding:0.5rem 0;border-bottom:1px solid rgba(0,230,118,0.05);}
+.skill-name{font-size:0.8rem;color:var(--text);font-weight:400;}
+.skill-bar{width:75px;height:2px;background:var(--border);position:relative;overflow:hidden;}
+.skill-fill{position:absolute;left:0;top:0;height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));transform:scaleX(0);transform-origin:left;transition:transform 1.2s ease;}
 
-/* ===== PROJECTS ===== */
-.projects { background:var(--bg-alt); transition:background 0.4s; }
-.projects-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2px; }
-.project-card {
-  position:relative; overflow:hidden;
-  background:var(--card-bg); border:1px solid var(--border);
-  padding:2.3rem; transition:all 0.4s; cursor:none;
-}
-.project-card::before {
-  content:''; position:absolute; top:0; left:0; right:0; height:0;
-  background:linear-gradient(135deg,rgba(196,136,74,0.07),transparent);
-  transition:height 0.4s;
-}
-.project-card:hover::before { height:100%; }
-.project-card:hover { border-color:rgba(196,136,74,0.4); transform:translateY(-3px); }
-.project-number {
-  font-family:'Playfair Display',serif;
-  font-size:3rem; font-weight:900; color:var(--border);
-  line-height:1; margin-bottom:0.8rem; letter-spacing:-0.03em;
-}
-.project-category {
-  font-family:'DM Mono',monospace;
-  font-size:0.58rem; letter-spacing:0.15em; text-transform:uppercase;
-  color:var(--clay); margin-bottom:0.7rem;
-}
-.project-title { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:700; color:var(--text); margin-bottom:0.7rem; line-height:1.2; }
-.project-desc { font-size:0.8rem; color:var(--text-muted); line-height:1.75; font-weight:300; margin-bottom:1.4rem; }
-.project-stack { display:flex; flex-wrap:wrap; gap:0.4rem; }
-.stack-tag {
-  font-family:'DM Mono',monospace;
-  font-size:0.56rem; letter-spacing:0.08em; text-transform:uppercase;
-  padding:0.22rem 0.58rem; background:var(--tag-bg); color:var(--clay); border-radius:1px;
-}
+/* PROJECTS */
+.projects{background:var(--bg-alt);transition:background 0.4s;}
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.project-card{position:relative;overflow:hidden;background:var(--card-bg);border:1px solid var(--border);padding:2rem;transition:all 0.4s;cursor:pointer;}
+.project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:0;background:linear-gradient(135deg,var(--accent-soft),transparent);transition:height 0.4s;}
+.project-card::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--accent2),var(--accent));transition:width 0.4s;}
+.project-card:hover::before{height:100%;}
+.project-card:hover::after{width:100%;}
+.project-card:hover{border-color:rgba(0,230,118,0.35);transform:translateY(-4px);}
+.project-number{font-family:'Syne', sans-serif;font-size:2.8rem;font-weight:900;color:var(--border);line-height:1;margin-bottom:0.7rem;letter-spacing:-0.03em;}
+.project-category{font-family:'IBM Plex Mono', monospace;font-size:0.56rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.6rem;}
+.project-title{font-family:'Syne', sans-serif;font-size:1.2rem;font-weight:700;color:var(--text);margin-bottom:0.6rem;line-height:1.2;}
+.project-desc{font-size:0.78rem;color:var(--text-muted);line-height:1.75;font-weight:300;margin-bottom:1.2rem;}
+.project-stack{display:flex;flex-wrap:wrap;gap:0.35rem;}
+.stack-tag{font-family:'IBM Plex Mono', monospace;font-size:0.54rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.2rem 0.55rem;background:var(--tag-bg);color:var(--accent2);border-radius:1px;}
 
-/* ===== FARM ===== */
-.farm { position:relative; overflow:hidden; }
-.farm-bg {
-  position:absolute; inset:0;
-  background:
-    radial-gradient(ellipse 100% 60% at 50% 100%, rgba(45,74,30,0.18), transparent),
-    radial-gradient(ellipse 60% 50% at 10% 50%, rgba(45,74,30,0.1), transparent);
-}
-[data-theme="light"] .farm-bg {
-  background:
-    radial-gradient(ellipse 100% 60% at 50% 100%, rgba(45,74,30,0.07), transparent),
-    radial-gradient(ellipse 60% 50% at 10% 50%, rgba(45,74,30,0.04), transparent);
-}
-.farm-content { position:relative; z-index:1; }
-.farm-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
-.farm-text p { font-size:0.98rem; line-height:1.85; color:var(--text-dim); font-weight:300; margin-bottom:1.1rem; }
-.farm-text p strong { color:var(--gold); font-weight:500; }
-.farm-stats { display:grid; grid-template-columns:1fr 1fr; gap:1.3rem; margin-top:2rem; }
-.farm-stat { padding:1.3rem; border:1px solid var(--stat-border); background:var(--stat-bg); transition:background 0.4s, border-color 0.4s; }
-.farm-stat-num { font-family:'Playfair Display',serif; font-size:1.9rem; font-weight:900; color:var(--text-muted); line-height:1; margin-bottom:0.25rem; }
-.farm-stat-label { font-size:0.72rem; color:var(--text-muted); font-weight:300; }
-.farm-illustration { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
-.farm-item {
-  padding:1.8rem 1.3rem; background:var(--surface);
-  border:1px solid var(--border); text-align:center; transition:all 0.3s;
-}
-.farm-item:hover { background:rgba(45,74,30,0.25); transform:translateY(-4px); }
-.farm-item-icon { font-size:2.2rem; margin-bottom:0.7rem; display:block; }
-.farm-item-name { font-family:'Playfair Display',serif; font-size:0.92rem; color:var(--text); font-weight:700; margin-bottom:0.25rem; }
-.farm-item-desc { font-size:0.7rem; color:var(--text-muted); font-weight:300; }
+/* CONTACT */
+.contact{background:var(--bg);transition:background 0.4s;}
+.contact-inner{max-width:680px;margin:0 auto;text-align:center;}
+.contact-intro{font-family:'Outfit', sans-serif;font-size:clamp(1.1rem,2.3vw,1.75rem);font-style:italic;font-weight:400;color:var(--text-dim);line-height:1.55;margin-bottom:2.8rem;}
+.contact-methods{display:flex;justify-content:center;gap:1.3rem;flex-wrap:wrap;margin-bottom:2.2rem;}
+.contact-method{display:flex;flex-direction:column;align-items:center;gap:0.4rem;text-decoration:none;transition:all 0.3s;padding:1.3rem 1.6rem;border:1px solid var(--border);background:var(--card-bg);min-width:130px;backdrop-filter:blur(6px);}
+.contact-method:hover{border-color:var(--accent);transform:translateY(-3px);}
+.contact-method-icon{font-size:1.35rem;}
+.contact-method-label{font-family:'IBM Plex Mono', monospace;font-size:0.56rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);}
+.contact-method-value{font-size:0.76rem;color:var(--text);font-weight:400;}
+.contact-payment{display:flex;justify-content:center;gap:0.8rem;flex-wrap:wrap;margin-top:1.8rem;}
+.payment-badge{font-family:'IBM Plex Mono', monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.42rem 1rem;background:var(--surface);border:1px solid var(--border);color:var(--text-muted);}
 
-/* ===== CONTACT ===== */
-.contact { background:var(--bg-alt); transition:background 0.4s; }
-.contact-inner { max-width:680px; margin:0 auto; text-align:center; }
-.contact-intro {
-  font-family:'Playfair Display',serif;
-  font-size:clamp(1.2rem,2.5vw,1.85rem);
-  font-style:italic; font-weight:400;
-  color:var(--text-dim); line-height:1.55; margin-bottom:3rem;
-}
-.contact-methods { display:flex; justify-content:center; gap:1.5rem; flex-wrap:wrap; margin-bottom:2.5rem; }
-.contact-method {
-  display:flex; flex-direction:column; align-items:center; gap:0.45rem;
-  text-decoration:none; transition:all 0.3s;
-  padding:1.4rem 1.8rem; border:1px solid var(--border);
-  background:var(--card-bg); min-width:135px; backdrop-filter:blur(6px);
-}
-.contact-method:hover { border-color:var(--gold); transform:translateY(-3px); }
-.contact-method-icon { font-size:1.4rem; }
-.contact-method-label { font-family:'DM Mono',monospace; font-size:0.58rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-muted); }
-.contact-method-value { font-size:0.78rem; color:var(--text); font-weight:400; }
-.contact-payment { display:flex; justify-content:center; gap:0.9rem; flex-wrap:wrap; margin-top:2rem; }
-.payment-badge {
-  font-family:'DM Mono',monospace;
-  font-size:0.62rem; letter-spacing:0.1em; text-transform:uppercase;
-  padding:0.45rem 1.1rem; background:var(--surface); border:1px solid var(--border); color:var(--text-muted);
-}
+/* QR */
+.qr-wrapper{margin-top:2.8rem;display:flex;flex-direction:column;align-items:center;gap:1rem;}
+.qr-label{font-family:'IBM Plex Mono', monospace;font-size:0.63rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent2);display:flex;align-items:center;gap:0.8rem;}
+.qr-label::before,.qr-label::after{content:'';display:block;width:28px;height:1px;background:var(--accent2);opacity:0.5;}
+.qr-card{display:flex;align-items:center;gap:2.2rem;padding:1.8rem 2.2rem;background:var(--card-bg);border:1px solid var(--border);backdrop-filter:blur(10px);transition:background 0.4s,border-color 0.4s;}
+.qr-card:hover{border-color:var(--accent);}
+.qr-frame{width:155px;height:155px;padding:9px;background:#fff;border-radius:4px;flex-shrink:0;box-shadow:0 4px 20px rgba(0,230,118,0.15);display:flex;align-items:center;justify-content:center;}
+.qr-frame canvas{display:block;}
+.qr-info{text-align:left;}
+.qr-name{font-family:'Syne', sans-serif;font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:0.8rem;}
+.qr-detail{font-size:0.76rem;color:var(--text-muted);font-weight:300;margin-bottom:0.38rem;line-height:1.5;}
+.qr-download-btn{margin-top:1.1rem;font-family:'IBM Plex Mono', monospace;font-size:0.63rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.55rem 1.2rem;background:transparent;color:var(--accent2);border:1px solid var(--accent2);cursor:pointer;transition:all 0.3s;display:inline-block;}
+.qr-download-btn:hover{background:var(--accent2);color:#0A0F0F;}
+@media(max-width:600px){.qr-card{flex-direction:column;padding:1.4rem;gap:1.4rem;}.qr-info{text-align:center;}}
 
-/* ===== FOOTER ===== */
-footer {
-  padding:1.8rem 4rem;
-  border-top:1px solid var(--border);
-  display:flex; justify-content:space-between; align-items:center;
-  background:var(--bg); transition:background 0.4s;
-}
-.footer-copy { font-family:'DM Mono',monospace; font-size:0.58rem; letter-spacing:0.1em; color:var(--text-muted); opacity:0.6; }
-.footer-sig { font-family:'Playfair Display',serif; font-size:0.88rem; font-style:italic; color:var(--clay); opacity:0.6; }
+/* FOOTER */
+footer{padding:1.7rem 4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--bg);transition:background 0.4s;}
+.footer-copy{font-family:'IBM Plex Mono', monospace;font-size:0.57rem;letter-spacing:0.1em;color:var(--text-muted);opacity:0.55;}
+.footer-sig{font-family:'Syne', sans-serif;font-size:0.86rem;font-style:italic;color:var(--accent2);opacity:0.6;}
 
-/* ===== ANIMATIONS ===== */
-.fade-up { opacity:0; transform:translateY(28px); transition:opacity 0.75s ease, transform 0.75s ease; }
-.fade-up.visible { opacity:1; transform:translateY(0); }
+/* SWITCH PORTFOLIO BANNER */
+.switch-banner{background:var(--surface);border-bottom:1px solid var(--border);padding:0.55rem 4rem;display:flex;align-items:center;justify-content:space-between;}
+.switch-text{font-family:'IBM Plex Mono', monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);}
+.switch-link{font-family:'IBM Plex Mono', monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);text-decoration:none;border:1px solid var(--border);padding:0.3rem 0.8rem;transition:all 0.3s;}
+.switch-link:hover{background:var(--accent);color:#050F0A;}
+
+/* SWITCH BANNER */
+.switch-banner{background:var(--surface);border-bottom:1px solid var(--border);padding:0.52rem 4rem;display:flex;align-items:center;justify-content:space-between;}
+.switch-text{font-family:'IBM Plex Mono', monospace;font-size:0.57rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);}
+.switch-link{font-family:'IBM Plex Mono', monospace;font-size:0.57rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);text-decoration:none;border:1px solid var(--border);padding:0.28rem 0.75rem;transition:all 0.3s;}
+.switch-link:hover{background:var(--accent);color:#050F0A;}
+@media(max-width:900px){.switch-banner{padding:0.52rem 1.5rem;}}
+
+/* ANIMATIONS */
+.fade-up{opacity:0;transform:translateY(26px);transition:opacity 0.75s ease,transform 0.75s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
 .fade-up:nth-child(2){transition-delay:0.1s;}
 .fade-up:nth-child(3){transition-delay:0.2s;}
 .fade-up:nth-child(4){transition-delay:0.3s;}
-@keyframes fadeInLeft  { from{opacity:0;transform:translateX(-28px);}  to{opacity:1;transform:translateX(0);} }
-@keyframes fadeInRight { from{opacity:0;transform:translateX(28px);}   to{opacity:1;transform:translateX(0);} }
+.fade-up:nth-child(5){transition-delay:0.4s;}
+.fade-up:nth-child(6){transition-delay:0.5s;}
+@keyframes fadeInLeft{from{opacity:0;transform:translateX(-26px);}to{opacity:1;transform:translateX(0);}}
+@keyframes fadeInRight{from{opacity:0;transform:translateX(26px);}to{opacity:1;transform:translateX(0);}}
 
-/* ===== RESPONSIVE ===== */
+/* RESPONSIVE */
+@media(max-width:1000px){.projects-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:900px){
   nav{padding:1rem 1.5rem;}
-  nav .nav-center{display:none;}
+  .nav-center{display:none;}
   section{padding:5rem 1.5rem;}
   .hero{grid-template-columns:1fr;}
   .hero-left{padding:6rem 1.5rem 2rem;}
   .hero-right{display:none;}
-  .about-grid,.farm-grid{grid-template-columns:1fr;gap:2.5rem;}
+  .about-grid{grid-template-columns:1fr;gap:2.5rem;}
   .skills-grid{grid-template-columns:1fr;}
   .projects-grid{grid-template-columns:1fr;}
   footer{flex-direction:column;gap:0.8rem;text-align:center;padding:1.5rem;}
-  body{cursor:auto;}
-  .cursor,.cursor-ring{display:none;}
+  .switch-banner{padding:0.55rem 1.5rem;}
 }
 </style>
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<div class="bg-glow"></div>
+<div class="bg-glow2"></div>
+
+<!-- SWITCH BANNER -->
+<div class="switch-banner">
+  <span class="switch-text" data-i18n="switch_text">Portfolio Développeur Web</span>
+  <a href="portfolio-complet.html" class="switch-link" data-i18n="switch_link">→ Portfolio Complet</a>
+</div>
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">M.K.</a>
+  <a href="#" class="nav-logo">&lt;M.K./&gt;</a>
   <div class="nav-center">
-    <a href="#about"      data-i18n="nav_about">À propos</a>
+    <a href="#about"       data-i18n="nav_about">À propos</a>
     <a href="#competences" data-i18n="nav_skills">Compétences</a>
-    <a href="#projets"    data-i18n="nav_projects">Projets</a>
-    <a href="#ferme"      data-i18n="nav_farm">La Ferme</a>
-    <a href="#contact"    data-i18n="nav_contact">Contact</a>
+    <a href="#projets"     data-i18n="nav_projects">Projets</a>
+    <a href="#contact"     data-i18n="nav_contact">Contact</a>
   </div>
   <div class="nav-right">
-
-    <!-- Lang dropdown -->
     <div class="lang-dropdown" id="langDropdown">
       <div class="lang-btn" id="langBtn">
         <span class="flag" id="currentFlag">🇫🇷</span>
@@ -570,57 +311,48 @@ footer {
         <span class="chevron">▼</span>
       </div>
       <div class="lang-menu" id="langMenu">
-        <div class="lang-option active" data-lang="fr">
-          <span class="flag">🇫🇷</span>
-          <span class="lang-name">FR</span>
-          <span class="lang-native">Français</span>
-        </div>
-        <div class="lang-option" data-lang="en">
-          <span class="flag">🇬🇧</span>
-          <span class="lang-name">EN</span>
-          <span class="lang-native">English</span>
-        </div>
-        <div class="lang-option" data-lang="ar">
-          <span class="flag">🇸🇦</span>
-          <span class="lang-name">AR</span>
-          <span class="lang-native">العربية</span>
-        </div>
-
+        <div class="lang-option active" data-lang="fr"><span class="flag">🇫🇷</span><span class="lang-name">FR</span><span class="lang-native">Français</span></div>
+        <div class="lang-option" data-lang="en"><span class="flag">🇬🇧</span><span class="lang-name">EN</span><span class="lang-native">English</span></div>
+        <div class="lang-option" data-lang="ar"><span class="flag">🇸🇦</span><span class="lang-name">AR</span><span class="lang-native">العربية</span></div>
       </div>
     </div>
-
-    <!-- Theme toggle -->
     <button class="theme-btn" id="themeToggle" aria-label="Toggle theme"></button>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <!-- ✏️ Remplace "VOTRE_PHOTO.jpg" par le chemin de ta photo -->
-  <div class="hero-bg" style="background-image: url('VOTRE_PHOTO.jpg');"></div>
-  <svg class="baobab-svg" viewBox="0 0 200 300" fill="none">
-    <rect x="85" y="150" width="30" height="150" fill="currentColor"/>
-    <ellipse cx="100" cy="80" rx="80" ry="90" fill="currentColor"/>
-    <ellipse cx="50"  cy="60" rx="45" ry="50"  fill="currentColor"/>
-    <ellipse cx="150" cy="70" rx="40" ry="45"  fill="currentColor"/>
-    <ellipse cx="100" cy="40" rx="50" ry="40"  fill="currentColor"/>
-    <line x1="100" y1="150" x2="40"  y2="80"  stroke="var(--bg)" stroke-width="8"/>
-    <line x1="100" y1="150" x2="160" y2="90"  stroke="var(--bg)" stroke-width="8"/>
-    <line x1="100" y1="150" x2="100" y2="60"  stroke="var(--bg)" stroke-width="10"/>
-    <line x1="100" y1="120" x2="55"  y2="130" stroke="var(--bg)" stroke-width="6"/>
-    <line x1="100" y1="120" x2="145" y2="125" stroke="var(--bg)" stroke-width="6"/>
+  <div class="hero-bg"></div>
+  <div class="hero-bg-grad"></div>
+
+  <!-- Circuit SVG deco -->
+  <svg class="circuit" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="20" y="20" width="260" height="260" rx="4" stroke="#00E676" stroke-width="0.5" stroke-dasharray="4 4"/>
+    <line x1="20" y1="80" x2="120" y2="80" stroke="#00E676" stroke-width="0.5"/>
+    <circle cx="120" cy="80" r="4" fill="#00E676" opacity="0.6"/>
+    <line x1="120" y1="80" x2="120" y2="150" stroke="#00E676" stroke-width="0.5"/>
+    <line x1="120" y1="150" x2="220" y2="150" stroke="#00E676" stroke-width="0.5"/>
+    <circle cx="220" cy="150" r="4" fill="#00E676" opacity="0.6"/>
+    <line x1="220" y1="150" x2="220" y2="220" stroke="#00E676" stroke-width="0.5"/>
+    <line x1="80" y1="180" x2="160" y2="180" stroke="#00E676" stroke-width="0.5"/>
+    <circle cx="80" cy="180" r="3" fill="#00897B" opacity="0.5"/>
+    <line x1="160" y1="180" x2="160" y2="240" stroke="#00E676" stroke-width="0.5"/>
+    <rect x="140" y="50" width="40" height="24" rx="2" stroke="#00897B" stroke-width="0.5" opacity="0.4"/>
+    <rect x="50" y="200" width="30" height="30" rx="2" stroke="#00897B" stroke-width="0.5" opacity="0.4"/>
+    <circle cx="250" cy="60" r="15" stroke="#00E676" stroke-width="0.5" opacity="0.3"/>
+    <circle cx="250" cy="60" r="7" stroke="#00E676" stroke-width="0.5" opacity="0.5"/>
   </svg>
 
   <div class="hero-left">
     <div class="hero-eyebrow" data-i18n="hero_location">Saint-Louis, Sénégal</div>
     <h1 class="hero-name">Mouhameth<span>Konaté</span></h1>
-    <p class="hero-title" data-i18n="hero_subtitle">Développeur web & entrepreneur agro-pastoral au cœur du Sénégal</p>
+    <p class="hero-title" data-i18n="hero_subtitle">Développeur web PHP & WordPress — solutions pensées pour le marché sénégalais</p>
     <div class="hero-tags">
       <span class="tag">PHP · MySQL</span>
       <span class="tag">WordPress</span>
       <span class="tag">Wave · Orange Money</span>
-      <span class="tag" data-i18n="tag_farming">Élevage pastoral</span>
-      <span class="tag" data-i18n="tag_exp">10+ ans terrain</span>
+      <span class="tag" data-i18n="tag_exp">6+ projets livrés</span>
+      <span class="tag">Marché local</span>
     </div>
     <div class="hero-cta">
       <a href="#projets" class="btn-primary" data-i18n="cta_projects">Voir mes projets</a>
@@ -632,22 +364,22 @@ footer {
     <div class="hero-card">
       <svg class="floating-badge" viewBox="0 0 100 100">
         <path id="cp" d="M50,50 m-35,0 a35,35 0 1,1 70,0 a35,35 0 1,1 -70,0" fill="none"/>
-        <text font-family="DM Mono,monospace" font-size="9" fill="#C4884A" letter-spacing="3">
-          <textPath href="#cp">SÉNÉGAL · WEB · ÉLEVAGE · BUILD · </textPath>
+        <text font-family="IBM Plex Mono,monospace" font-size="8.5" fill="#00897B" letter-spacing="2.5">
+          <textPath href="#cp">PHP · WORDPRESS · WAVE · BUILD · </textPath>
         </text>
-        <circle cx="50" cy="50" r="4" fill="#D4A017"/>
+        <circle cx="50" cy="50" r="4" fill="#00E676"/>
       </svg>
       <div class="hero-card-inner">
         <div class="stat-row">
-          <div class="stat-label" data-i18n="card_exp_label">Expérience terrain</div>
-          <div class="stat-value">10+</div>
-          <div class="stat-sub" data-i18n="card_exp_sub">ans en élevage pastoral</div>
+          <div class="stat-label" data-i18n="card_proj_label">Projets livrés</div>
+          <div class="stat-value">6+</div>
+          <div class="stat-sub" data-i18n="card_proj_sub">apps PHP & sites WordPress</div>
         </div>
         <div class="divider"></div>
         <div class="stat-row">
-          <div class="stat-label" data-i18n="card_proj_label">Projets livrés</div>
-          <div class="stat-value">6+</div>
-          <div class="stat-sub" data-i18n="card_proj_sub">sites & apps PHP / WordPress</div>
+          <div class="stat-label" data-i18n="card_stack_label">Stack principale</div>
+          <div class="stat-value" style="font-size:1rem;line-height:1.4;">PHP<br>MySQL</div>
+          <div class="stat-sub">WordPress · WooCommerce</div>
         </div>
         <div class="divider"></div>
         <div class="stat-row">
@@ -669,30 +401,30 @@ footer {
 <section class="about" id="about">
   <div class="section-header">
     <span class="section-num">01</span>
-    <h2 class="section-title"><span data-i18n="about_title_1">Qui suis-</span><em data-i18n="about_title_2">je</em> ?</h2>
+    <h2 class="section-title"><span data-i18n="about_t1">Qui suis-</span><em data-i18n="about_t2">je</em> ?</h2>
     <div class="section-line"></div>
   </div>
   <div class="about-grid">
     <div class="about-text fade-up">
-      <p data-i18n="about_p1">Entrepreneur ancré dans la réalité sénégalaise, je combine <strong>deux univers complémentaires</strong> : le développement web orienté marché local et l'élevage pastoral pratiqué depuis plus de dix ans à Rao, dans la région de Saint-Louis.</p>
-      <p data-i18n="about_p2">Côté tech, je conçois des sites et applications <strong>pensés pour le Sénégal</strong> : interfaces en français, intégration Wave et Orange Money, tarification en FCFA. Je livre des produits complets et déployables, pas des fragments de code.</p>
-      <p data-i18n="about_p3">Côté terrain, je conduis <strong>Mahmoud's Farm</strong> — un élevage intégré (aviculture & ruminants) avec une vision entrepreneuriale claire et un plan d'investissement finalisé pour les marchés de la région.</p>
+      <p data-i18n="about_p1">Développeur web freelance basé à Rao, je conçois des sites et applications <strong>PHP/MySQL et WordPress</strong> adaptés aux réalités du marché sénégalais. Chaque projet est livré clé en main : maquettes, code, panneau admin, déploiement et documentation.</p>
+      <p data-i18n="about_p2">Ma spécialité : intégrer <strong>Wave et Orange Money</strong>, travailler en devise locale et construire des interfaces que les utilisateurs sénégalais comprennent intuitivement. Je suis également étudiant en Licence Développement Web & Mobile à l'UNCHK.</p>
+      <p data-i18n="about_p3">Je livre des <strong>produits complets</strong>, pas des fragments de code — du cahier des charges au déploiement sur Hostinger ou tout autre hébergeur.</p>
     </div>
     <div class="about-domains fade-up">
       <div class="domain-card">
-        <div class="domain-icon">💻</div>
-        <div class="domain-title" data-i18n="domain1_title">Développement Web</div>
-        <div class="domain-desc" data-i18n="domain1_desc">Sites vitrines, e-commerce, thèmes WordPress et applications PHP/MySQL — de la conception au déploiement complet.</div>
+        <div class="domain-icon">⚙️</div>
+        <div class="domain-title" data-i18n="d1_title">Applications PHP sur mesure</div>
+        <div class="domain-desc" data-i18n="d1_desc">Panneaux admin, gestion de tontines, plateformes de location — architecture MVC propre et sécurisée.</div>
       </div>
       <div class="domain-card">
-        <div class="domain-icon">🐄</div>
-        <div class="domain-title" data-i18n="domain2_title">Élevage Pastoral</div>
-        <div class="domain-desc" data-i18n="domain2_desc">Aviculture et élevage de ruminants à Rao. Projet entrepreneurial actif avec business plan et pitch investisseurs prêts.</div>
+        <div class="domain-icon">🌐</div>
+        <div class="domain-title" data-i18n="d2_title">Sites WordPress & WooCommerce</div>
+        <div class="domain-desc" data-i18n="d2_desc">Thèmes personnalisés, boutiques en ligne, plugins sur mesure avec guide de prise en main livré.</div>
       </div>
       <div class="domain-card">
-        <div class="domain-icon">🇸🇳</div>
-        <div class="domain-title" data-i18n="domain3_title">Solutions Locales</div>
-        <div class="domain-desc" data-i18n="domain3_desc">Spécialiste du marché sénégalais — Wave, Orange Money, FCFA, et distribution régionale.</div>
+        <div class="domain-icon">💳</div>
+        <div class="domain-title" data-i18n="d3_title">Paiements Mobiles SN</div>
+        <div class="domain-desc" data-i18n="d3_desc">Intégration Wave API, Orange Money — paiements mobiles locaux maîtrisés.</div>
       </div>
     </div>
   </div>
@@ -702,33 +434,36 @@ footer {
 <section id="competences">
   <div class="section-header">
     <span class="section-num">02</span>
-    <h2 class="section-title"><span data-i18n="skills_title_1">Stack & </span><em data-i18n="skills_title_2">Savoir-faire</em></h2>
+    <h2 class="section-title"><span data-i18n="sk_t1">Stack & </span><em data-i18n="sk_t2">Compétences</em></h2>
     <div class="section-line"></div>
   </div>
   <div class="skills-grid">
     <div class="skill-group fade-up">
-      <div class="skill-group-title" data-i18n="sk_group1">Backend PHP</div>
-      <div class="skill-item"><span class="skill-name">PHP</span><div class="skill-bar"><div class="skill-fill" data-w="0.9"></div></div></div>
-      <div class="skill-item"><span class="skill-name">MySQL</span><div class="skill-bar"><div class="skill-fill" data-w="0.88"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Admin Panel PHP</span><div class="skill-bar"><div class="skill-fill" data-w="0.85"></div></div></div>
+      <div class="skill-group-title" data-i18n="sk_g1">Backend PHP</div>
+      <div class="skill-item"><span class="skill-name">PHP</span><div class="skill-bar"><div class="skill-fill" data-w="0.92"></div></div></div>
+      <div class="skill-item"><span class="skill-name">MySQL / MariaDB</span><div class="skill-bar"><div class="skill-fill" data-w="0.88"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Architecture MVC</span><div class="skill-bar"><div class="skill-fill" data-w="0.85"></div></div></div>
       <div class="skill-item"><span class="skill-name">Sessions & Auth</span><div class="skill-bar"><div class="skill-fill" data-w="0.82"></div></div></div>
-      <div class="skill-item"><span class="skill-name">API REST PHP</span><div class="skill-bar"><div class="skill-fill" data-w="0.75"></div></div></div>
+      <div class="skill-item"><span class="skill-name">API REST PHP</span><div class="skill-bar"><div class="skill-fill" data-w="0.78"></div></div></div>
+      <div class="skill-item"><span class="skill-name">PDF / CSV Export</span><div class="skill-bar"><div class="skill-fill" data-w="0.80"></div></div></div>
     </div>
     <div class="skill-group fade-up">
-      <div class="skill-group-title" data-i18n="sk_group2">WordPress & Frontend</div>
+      <div class="skill-group-title" data-i18n="sk_g2">WordPress & Frontend</div>
       <div class="skill-item"><span class="skill-name">WordPress</span><div class="skill-bar"><div class="skill-fill" data-w="0.88"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Thèmes & Plugins</span><div class="skill-bar"><div class="skill-fill" data-w="0.82"></div></div></div>
+      <div class="skill-item"><span class="skill-name">WooCommerce</span><div class="skill-bar"><div class="skill-fill" data-w="0.82"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Thèmes Custom</span><div class="skill-bar"><div class="skill-fill" data-w="0.80"></div></div></div>
       <div class="skill-item"><span class="skill-name">HTML5 / CSS3</span><div class="skill-bar"><div class="skill-fill" data-w="0.92"></div></div></div>
       <div class="skill-item"><span class="skill-name">Bootstrap 5</span><div class="skill-bar"><div class="skill-fill" data-w="0.88"></div></div></div>
-      <div class="skill-item"><span class="skill-name">JavaScript</span><div class="skill-bar"><div class="skill-fill" data-w="0.78"></div></div></div>
+      <div class="skill-item"><span class="skill-name">JavaScript / AJAX</span><div class="skill-bar"><div class="skill-fill" data-w="0.78"></div></div></div>
     </div>
     <div class="skill-group fade-up">
-      <div class="skill-group-title" data-i18n="sk_group3">Intégrations & Marché SN</div>
+      <div class="skill-group-title" data-i18n="sk_g3">Intégrations & Outils</div>
       <div class="skill-item"><span class="skill-name">Wave API</span><div class="skill-bar"><div class="skill-fill" data-w="0.85"></div></div></div>
       <div class="skill-item"><span class="skill-name">Orange Money</span><div class="skill-bar"><div class="skill-fill" data-w="0.82"></div></div></div>
-      <div class="skill-item"><span class="skill-name" data-i18n="sk_ui">UI/UX Sénégal</span><div class="skill-bar"><div class="skill-fill" data-w="0.92"></div></div></div>
-      <div class="skill-item"><span class="skill-name">WooCommerce</span><div class="skill-bar"><div class="skill-fill" data-w="0.78"></div></div></div>
-      <div class="skill-item"><span class="skill-name" data-i18n="sk_deploy">Déploiement & Héberg.</span><div class="skill-bar"><div class="skill-fill" data-w="0.80"></div></div></div>
+      <div class="skill-item"><span class="skill-name">WhatsApp Business</span><div class="skill-bar"><div class="skill-fill" data-w="0.80"></div></div></div>
+      <div class="skill-item"><span class="skill-name">GitHub / Git</span><div class="skill-bar"><div class="skill-fill" data-w="0.78"></div></div></div>
+      <div class="skill-item"><span class="skill-name" data-i18n="sk_deploy">Hostinger / Déploiement</span><div class="skill-bar"><div class="skill-fill" data-w="0.82"></div></div></div>
+      <div class="skill-item"><span class="skill-name">phpMyAdmin</span><div class="skill-bar"><div class="skill-fill" data-w="0.85"></div></div></div>
     </div>
   </div>
 </section>
@@ -737,109 +472,83 @@ footer {
 <section class="projects" id="projets">
   <div class="section-header">
     <span class="section-num">03</span>
-    <h2 class="section-title"><span data-i18n="proj_title_1">Projets </span><em data-i18n="proj_title_2">livrés</em></h2>
+    <h2 class="section-title"><span data-i18n="pr_t1">Projets </span><em data-i18n="pr_t2">réalisés</em></h2>
     <div class="section-line"></div>
   </div>
   <div class="projects-grid">
+
     <div class="project-card fade-up">
       <div class="project-number">01</div>
-      <div class="project-category" data-i18n="p1_cat">E-commerce · Artisanat sénégalais</div>
+      <div class="project-category" data-i18n="p1_cat">E-commerce · Savon liquide multi-usage</div>
+      <h3 class="project-title">TAY Multi-Usage</h3>
+      <p class="project-desc" data-i18n="p1_desc">Site e-commerce pour une marque de savon liquide sénégalaise. Admin panel complet : gestion produits, commandes, vidéos, export CSV. Intégration WhatsApp et paiements mobiles locaux. Déployé sur Hostinger après migration depuis InfinityFree.</p>
+      <div class="project-stack">
+        <span class="stack-tag">PHP natif</span><span class="stack-tag">MySQL</span>
+        <span class="stack-tag">Admin Panel</span><span class="stack-tag">WhatsApp</span>
+        <span class="stack-tag">CSV Export</span><span class="stack-tag">Hostinger</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-up">
+      <div class="project-number">02</div>
+      <div class="project-category" data-i18n="p2_cat">Fintech · Épargne communautaire</div>
+      <h3 class="project-title">Tontine Platform</h3>
+      <p class="project-desc" data-i18n="p2_desc">Plateforme communautaire de gestion de tontines en PHP MVC pur (sans framework). Modules : cycles, prêts, épargne, aide médicale, événements, paiements mobiles, exports PDF/CSV. Compatible MariaDB et WAMP/Windows.</p>
+      <div class="project-stack">
+        <span class="stack-tag">PHP MVC</span><span class="stack-tag">MariaDB</span>
+        <span class="stack-tag">Wave</span><span class="stack-tag">Orange Money</span>
+        <span class="stack-tag">PDF/CSV</span><span class="stack-tag">WAMP</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-up">
+      <div class="project-number">03</div>
+      <div class="project-category" data-i18n="p3_cat">Location · Gestion de flotte</div>
+      <h3 class="project-title">CarLoc</h3>
+      <p class="project-desc" data-i18n="p3_desc">Plateforme de gestion de location de voitures — projet de fin de cycle (chef de projet, équipe de 9). Architecture MVC PHP, interface conçue et validée, workflow GitHub, déploiement Hostinger. Documentation complète livrée.</p>
+      <div class="project-stack">
+        <span class="stack-tag">PHP MVC</span><span class="stack-tag">MySQL</span>
+        <span class="stack-tag">GitHub</span><span class="stack-tag">Interface validée</span>
+        <span class="stack-tag">Hostinger</span><span class="stack-tag">UML</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-up">
+      <div class="project-number">04</div>
+      <div class="project-category" data-i18n="p4_cat">E-commerce · Artisanat sénégalais</div>
       <h3 class="project-title">Artizone</h3>
-      <p class="project-desc" data-i18n="p1_desc">Plateforme e-commerce complète pour la vente de produits artisanaux sénégalais. Panneau admin PHP sur mesure, catalogue produits, intégration Wave et Orange Money, documentation de maintenance livrée au client.</p>
+      <p class="project-desc" data-i18n="p4_desc">Plateforme e-commerce complète pour la vente de produits artisanaux sénégalais. Panneau admin PHP sur mesure, catalogue produits, intégration Wave et Orange Money, documentation de maintenance livrée au client.</p>
       <div class="project-stack">
         <span class="stack-tag">PHP</span><span class="stack-tag">MySQL</span>
         <span class="stack-tag">Bootstrap 5</span><span class="stack-tag">Wave API</span>
         <span class="stack-tag">Orange Money</span><span class="stack-tag">Admin Panel</span>
       </div>
     </div>
+
     <div class="project-card fade-up">
-      <div class="project-number">02</div>
-      <div class="project-category" data-i18n="p2_cat">E-commerce · Produits ménagers</div>
+      <div class="project-number">05</div>
+      <div class="project-category" data-i18n="p5_cat">E-commerce · Produits ménagers</div>
       <h3 class="project-title">CleanShop WordPress</h3>
-      <p class="project-desc" data-i18n="p2_desc">Site e-commerce pour une marque de produits lavants, réalisé sous WordPress avec thème personnalisé et WooCommerce. Livraison avec devis client professionnel en français et guide de prise en main.</p>
+      <p class="project-desc" data-i18n="p5_desc">Site e-commerce pour une marque de produits lavants, réalisé sous WordPress avec thème personnalisé et WooCommerce. Livraison avec devis client professionnel en français et guide de prise en main.</p>
       <div class="project-stack">
         <span class="stack-tag">WordPress</span><span class="stack-tag">WooCommerce</span>
         <span class="stack-tag">Thème Custom</span><span class="stack-tag">CSS</span>
+        <span class="stack-tag">Devis FR</span>
       </div>
     </div>
+
     <div class="project-card fade-up">
-      <div class="project-number">03</div>
-      <div class="project-category" data-i18n="p3_cat">Éducation · Université</div>
+      <div class="project-number">06</div>
+      <div class="project-category" data-i18n="p6_cat">Éducation · Université UNCHK</div>
       <h3 class="project-title">Jàngal-Digital</h3>
-      <p class="project-desc" data-i18n="p3_desc">Version WordPress de la plateforme éducative pour les étudiants de l'UNCHK. Thème adapté, intégration Moodle, tutoriels YouTube embarqués, ressources Google Drive et interface mobile-first.</p>
+      <p class="project-desc" data-i18n="p6_desc">Plateforme éducative WordPress pour les étudiants de l'UNCHK. Thème adapté, intégration Moodle, tutoriels YouTube embarqués, ressources Google Drive et interface mobile-first. Rebranding UVS → UNCHK inclus.</p>
       <div class="project-stack">
         <span class="stack-tag">WordPress</span><span class="stack-tag">Moodle</span>
         <span class="stack-tag">CSS Custom</span><span class="stack-tag">JavaScript</span>
+        <span class="stack-tag">Google Drive</span>
       </div>
     </div>
-    <div class="project-card fade-up">
-      <div class="project-number">04</div>
-      <div class="project-category" data-i18n="p4_cat">Farming · Projet personnel</div>
-      <h3 class="project-title">Mahmoud's Farm</h3>
-      <p class="project-desc" data-i18n="p4_desc">Site vitrine promotionnel pour le projet agro-pastoral Mahmoud's Farm. Présentation des filières, tarifs en FCFA, formulaire de contact mobile, conçu pour le marché local de Saint-Louis.</p>
-      <div class="project-stack">
-        <span class="stack-tag">WordPress</span><span class="stack-tag">HTML/CSS</span>
-        <span class="stack-tag">Mobile-first</span><span class="stack-tag">FCFA</span>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- FERME -->
-<section class="farm" id="ferme">
-  <div class="farm-bg"></div>
-  <div class="farm-content">
-    <div class="section-header">
-      <span class="section-num">04</span>
-      <h2 class="section-title">Mahmoud's <em>Farm</em></h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="farm-grid">
-      <div class="farm-text fade-up">
-        <p data-i18n="farm_p1">Depuis plus de <strong>10 ans à Rao</strong>, je conduis un élevage pastoral alliant aviculture intensive et élevage de ruminants. Une activité ancrée dans les réalités du marché de la région de Saint-Louis.</p>
-        <p data-i18n="farm_p2">Le projet <strong>Mahmoud's Farm</strong> cible les circuits de distribution locaux et régionaux, avec un business plan complet et un pitch investisseurs déjà finalisés pour la levée de financement.</p>
-        <div class="farm-stats">
-          <div class="farm-stat">
-            <div class="farm-stat-num">10+</div>
-            <div class="farm-stat-label" data-i18n="farm_s1">Années d'expérience terrain</div>
-          </div>
-          <div class="farm-stat">
-            <div class="farm-stat-num">2</div>
-            <div class="farm-stat-label" data-i18n="farm_s2">Filières d'élevage</div>
-          </div>
-          <div class="farm-stat">
-            <div class="farm-stat-num">SL</div>
-            <div class="farm-stat-label" data-i18n="farm_s3">Région Saint-Louis</div>
-          </div>
-          <div class="farm-stat">
-            <div class="farm-stat-num">↗</div>
-            <div class="farm-stat-label" data-i18n="farm_s4">Financement en cours</div>
-          </div>
-        </div>
-      </div>
-      <div class="farm-illustration fade-up">
-        <div class="farm-item">
-          <span class="farm-item-icon">🐔</span>
-          <div class="farm-item-name" data-i18n="farm_i1_name">Aviculture</div>
-          <div class="farm-item-desc" data-i18n="farm_i1_desc">Poulets de chair & poules pondeuses</div>
-        </div>
-        <div class="farm-item">
-          <span class="farm-item-icon">🐑</span>
-          <div class="farm-item-name" data-i18n="farm_i2_name">Ovins</div>
-          <div class="farm-item-desc" data-i18n="farm_i2_desc">Élevage de moutons, circuits locaux</div>
-        </div>
-        <div class="farm-item">
-          <span class="farm-item-icon">🐄</span>
-          <div class="farm-item-name" data-i18n="farm_i3_name">Bovins</div>
-          <div class="farm-item-desc" data-i18n="farm_i3_desc">Élevage bovin, lait & viande</div>
-        </div>
-        <div class="farm-item">
-          <span class="farm-item-icon">📊</span>
-          <div class="farm-item-name" data-i18n="farm_i4_name">Business Plan</div>
-          <div class="farm-item-desc" data-i18n="farm_i4_desc">Pitch deck & plan financier complets</div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -847,277 +556,220 @@ footer {
 <section class="contact" id="contact">
   <div class="contact-inner">
     <div class="section-header" style="justify-content:center;text-align:center;flex-direction:column;gap:0.5rem;">
-      <span class="section-num">05</span>
-      <h2 class="section-title" style="font-size:clamp(2rem,5vw,3.8rem)"><span data-i18n="contact_title_1">Travaillons </span><em data-i18n="contact_title_2">ensemble</em></h2>
+      <span class="section-num">04</span>
+      <h2 class="section-title" style="font-size:clamp(2rem,5vw,3.6rem);"><span data-i18n="ct_t1">Travaillons </span><em data-i18n="ct_t2">ensemble</em></h2>
     </div>
-    <p class="contact-intro" data-i18n="contact_intro">Projet web, site WordPress, e-commerce local ou investissement dans l'élevage — je suis ouvert à toute collaboration sérieuse depuis Saint-Louis.</p>
+    <p class="contact-intro" data-i18n="ct_intro">Projet web, site WordPress, e-commerce local ou application PHP sur mesure — je suis disponible depuis Saint-Louis pour tout devis sérieux.</p>
     <div class="contact-methods">
       <a href="mailto:mouhamethkonate0@gmail.com" class="contact-method">
         <span class="contact-method-icon">✉️</span>
-        <span class="contact-method-label" data-i18n="contact_email">Email</span>
+        <span class="contact-method-label" data-i18n="ct_email">Email</span>
         <span class="contact-method-value">mouhamethkonate0@gmail.com</span>
       </a>
-      <a href="tel:+221785237967" class="contact-method">
+      <a href="tel:+221XXXXXXXX" class="contact-method">
         <span class="contact-method-icon">📱</span>
-        <span class="contact-method-label" data-i18n="contact_phone">Téléphone</span>
+        <span class="contact-method-label" data-i18n="ct_phone">Téléphone</span>
         <span class="contact-method-value">+221 78 523 79 67</span>
       </a>
       <a href="#" class="contact-method">
         <span class="contact-method-icon">💼</span>
         <span class="contact-method-label">LinkedIn</span>
-        <span class="contact-method-value">Mouhameth Konaté</span>
+        <span class="contact-method-value">Mouhameth Konate</span>
       </a>
     </div>
     <div class="contact-payment">
       <span class="payment-badge">💛 Wave</span>
       <span class="payment-badge">🟠 Orange Money</span>
-      <span class="payment-badge" data-i18n="payment_transfer">🏦 Virement FCFA</span>
+      <span class="payment-badge" data-i18n="ct_transfer">🏦 Virement local</span>
+    </div>
+    <div class="qr-wrapper fade-up">
+      <div class="qr-label" data-i18n="qr_label">Scanner pour me contacter</div>
+      <div class="qr-card">
+        <div class="qr-frame"><canvas id="qrCanvas"></canvas></div>
+        <div class="qr-info">
+          <div class="qr-name">Mouhameth Konaté</div>
+          <div class="qr-detail">📱 +221 78 523 79 67</div>
+          <div class="qr-detail">✉️ mouhamethkonate0@gmail.com</div>
+          <div class="qr-detail">🌐 konatemahmoud.github.io/Portfolio1</div>
+          <div class="qr-detail">📍 Rao, Saint-Louis, Sénégal</div>
+          <button class="qr-download-btn" id="qrDownload" data-i18n="qr_download">⬇ Télécharger</button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <span class="footer-copy">© 2026 Mouhameth Konaté — Rao, Saint-Louis, Sénégal</span>
-  <span class="footer-sig" data-i18n="footer_sig">Code · Élevage · Vision</span>
+  <span class="footer-copy">© 2025 Mouhameth Konaté — Rao, Saint-Louis, Sénégal</span>
+  <span class="footer-sig" data-i18n="footer_sig">Code · PHP · WordPress</span>
 </footer>
 
-<!-- ================================================================
-     SCRIPTS
-================================================================ -->
 <script>
-/* ============================================================
-   TRANSLATIONS
-   ============================================================ */
-const LANGS = {
-  fr: {
-    flag:'🇫🇷', label:'FR',
-    nav_about:'À propos', nav_skills:'Compétences', nav_projects:'Projets', nav_farm:'La Ferme', nav_contact:'Contact',
+/* ===== TRANSLATIONS ===== */
+window.LANGS = {
+  fr:{
+    flag:'🇫🇷',label:'FR',
+    switch_text:'Portfolio Développeur Web', switch_link:'→ Portfolio Complet',
+    nav_about:'À propos',nav_skills:'Compétences',nav_projects:'Projets',nav_contact:'Contact',
     hero_location:'Saint-Louis, Sénégal',
-    hero_subtitle:'Développeur web & entrepreneur agro-pastoral au cœur du Sénégal',
-    tag_farming:'Élevage pastoral', tag_exp:'10+ ans terrain',
-    cta_projects:'Voir mes projets', cta_contact:'Me contacter',
-    card_exp_label:'Expérience terrain', card_exp_sub:'ans en élevage pastoral',
-    card_proj_label:'Projets livrés', card_proj_sub:'sites & apps PHP / WordPress',
-    card_market_label:'Marché cible', card_market_sub:'solutions 100% locales',
+    hero_subtitle:'Développeur web PHP & WordPress — solutions pensées pour le marché sénégalais',
+    tag_exp:'6+ projets livrés',
+    cta_projects:'Voir mes projets',cta_contact:'Me contacter',
+    card_proj_label:'Projets livrés',card_proj_sub:'apps PHP & sites WordPress',
+    card_stack_label:'Stack principale',card_market_label:'Marché cible',card_market_sub:'solutions 100% locales',
     location:'Rao, Saint-Louis — Sénégal',
-    about_title_1:'Qui suis-', about_title_2:'je',
-    about_p1:'Entrepreneur ancré dans la réalité sénégalaise, je combine <strong>deux univers complémentaires</strong> : le développement web orienté marché local et l\'élevage pastoral pratiqué depuis plus de dix ans à Rao, dans la région de Saint-Louis.',
-    about_p2:'Côté tech, je conçois des sites et applications <strong>pensés pour le Sénégal</strong> : interfaces en français, intégration Wave et Orange Money, tarification en FCFA. Je livre des produits complets et déployables, pas des fragments de code.',
-    about_p3:'Côté terrain, je conduis <strong>Mahmoud\'s Farm</strong> — un élevage intégré (aviculture & ruminants) avec une vision entrepreneuriale claire et un plan d\'investissement finalisé pour les marchés de la région.',
-    domain1_title:'Développement Web', domain1_desc:'Sites vitrines, e-commerce, thèmes WordPress et applications PHP/MySQL — de la conception au déploiement complet.',
-    domain2_title:'Élevage Pastoral', domain2_desc:'Aviculture et élevage de ruminants à Rao. Projet entrepreneurial actif avec business plan et pitch investisseurs prêts.',
-    domain3_title:'Solutions Locales', domain3_desc:'Spécialiste du marché sénégalais — Wave, Orange Money, FCFA, et distribution régionale.',
-    skills_title_1:'Stack & ', skills_title_2:'Savoir-faire',
-    sk_group1:'Backend PHP', sk_group2:'WordPress & Frontend', sk_group3:'Intégrations & Marché SN',
-    sk_ui:'UI/UX Sénégal', sk_deploy:'Déploiement & Héberg.',
-    proj_title_1:'Projets ', proj_title_2:'livrés',
-    p1_cat:'E-commerce · Artisanat sénégalais', p1_desc:'Plateforme e-commerce complète pour la vente de produits artisanaux sénégalais. Panneau admin PHP sur mesure, catalogue produits, intégration Wave et Orange Money, documentation de maintenance livrée au client.',
-    p2_cat:'E-commerce · Produits ménagers', p2_desc:'Site e-commerce pour une marque de produits lavants, réalisé sous WordPress avec thème personnalisé et WooCommerce. Livraison avec devis client professionnel en français et guide de prise en main.',
-    p3_cat:'Éducation · Université', p3_desc:'Version WordPress de la plateforme éducative pour les étudiants de l\'UNCHK. Thème adapté, intégration Moodle, tutoriels YouTube embarqués, ressources Google Drive et interface mobile-first.',
-    p4_cat:'Farming · Projet personnel', p4_desc:'Site vitrine promotionnel pour le projet agro-pastoral Mahmoud\'s Farm. Présentation des filières, tarifs en FCFA, formulaire de contact mobile, conçu pour le marché local de Saint-Louis.',
-    farm_p1:'Depuis plus de <strong>10 ans à Rao</strong>, je conduis un élevage pastoral alliant aviculture intensive et élevage de ruminants. Une activité ancrée dans les réalités du marché de la région de Saint-Louis.',
-    farm_p2:'Le projet <strong>Mahmoud\'s Farm</strong> cible les circuits de distribution locaux et régionaux, avec un business plan complet et un pitch investisseurs déjà finalisés pour la levée de financement.',
-    farm_s1:'Années d\'expérience terrain', farm_s2:'Filières d\'élevage', farm_s3:'Région Saint-Louis', farm_s4:'Financement en cours',
-    farm_i1_name:'Aviculture', farm_i1_desc:'Poulets de chair & poules pondeuses',
-    farm_i2_name:'Ovins', farm_i2_desc:'Élevage de moutons, circuits locaux',
-    farm_i3_name:'Bovins', farm_i3_desc:'Élevage bovin, lait & viande',
-    farm_i4_name:'Business Plan', farm_i4_desc:'Pitch deck & plan financier complets',
-    contact_title_1:'Travaillons ', contact_title_2:'ensemble',
-    contact_intro:'Projet web, site WordPress, e-commerce local ou investissement dans l\'élevage — je suis ouvert à toute collaboration sérieuse depuis Saint-Louis.',
-    contact_email:'Email', contact_phone:'Téléphone',
-    payment_transfer:'🏦 Virement FCFA',
-    footer_sig:'Code · Élevage · Vision',
-    dir:'ltr', htmlLang:'fr'
+    about_t1:'Qui suis-',about_t2:'je',
+    about_p1:'Développeur web freelance basé à Rao, je conçois des sites et applications <strong>PHP/MySQL et WordPress</strong> adaptés aux réalités du marché sénégalais. Chaque projet est livré clé en main : maquettes, code, panneau admin, déploiement et documentation.',
+    about_p2:'Ma spécialité : intégrer <strong>Wave et Orange Money</strong>, travailler en devise locale et construire des interfaces que les utilisateurs sénégalais comprennent intuitivement. Je suis également étudiant en Licence Développement Web & Mobile à l\'UNCHK.',
+    about_p3:'Je livre des <strong>produits complets</strong>, pas des fragments de code — du cahier des charges au déploiement sur Hostinger ou tout autre hébergeur.',
+    d1_title:'Applications PHP sur mesure',d1_desc:'Panneaux admin, gestion de tontines, plateformes de location — architecture MVC propre et sécurisée.',
+    d2_title:'Sites WordPress & WooCommerce',d2_desc:'Thèmes personnalisés, boutiques en ligne, plugins sur mesure avec guide de prise en main livré.',
+    d3_title:'Paiements Mobiles SN',d3_desc:'Intégration Wave API, Orange Money — paiements mobiles locaux maîtrisés.',
+    sk_t1:'Stack & ',sk_t2:'Compétences',
+    sk_g1:'Backend PHP',sk_g2:'WordPress & Frontend',sk_g3:'Intégrations & Outils',
+    sk_deploy:'Hostinger / Déploiement',
+    pr_t1:'Projets ',pr_t2:'réalisés',
+    p1_cat:'E-commerce · Savon liquide multi-usage',p1_desc:'Site e-commerce pour une marque de savon liquide sénégalaise. Admin panel complet : gestion produits, commandes, vidéos, export CSV. Intégration WhatsApp et paiements mobiles locaux. Déployé sur Hostinger après migration depuis InfinityFree.',
+    p2_cat:'Fintech · Épargne communautaire',p2_desc:'Plateforme communautaire de gestion de tontines en PHP MVC pur (sans framework). Modules : cycles, prêts, épargne, aide médicale, événements, paiements mobiles, exports PDF/CSV. Compatible MariaDB et WAMP/Windows.',
+    p3_cat:'Location · Gestion de flotte',p3_desc:'Plateforme de gestion de location de voitures — projet de fin de cycle (chef de projet, équipe de 9). Architecture MVC PHP, interface conçue et validée, workflow GitHub, déploiement Hostinger.',
+    p4_cat:'E-commerce · Artisanat sénégalais',p4_desc:'Plateforme e-commerce complète pour la vente de produits artisanaux sénégalais. Panneau admin PHP sur mesure, catalogue produits, intégration Wave et Orange Money, documentation de maintenance livrée au client.',
+    p5_cat:'E-commerce · Produits ménagers',p5_desc:'Site e-commerce pour une marque de produits lavants sous WordPress avec thème personnalisé et WooCommerce. Livraison avec devis et guide de prise en main.',
+    p6_cat:'Éducation · Université UNCHK',p6_desc:'Plateforme éducative WordPress pour les étudiants de l\'UNCHK. Thème adapté, intégration Moodle, tutoriels YouTube embarqués, ressources Google Drive et interface mobile-first.',
+    ct_t1:'Travaillons ',ct_t2:'ensemble',
+    ct_intro:'Projet web, site WordPress, e-commerce local ou application PHP sur mesure — je suis disponible depuis Saint-Louis pour tout devis sérieux.',
+    ct_email:'Email',ct_phone:'Téléphone',ct_transfer:'🏦 Virement local',
+    qr_label:'Scanner pour me contacter',qr_download:'⬇ Télécharger',
+    footer_sig:'Code · PHP · WordPress',dir:'ltr',htmlLang:'fr'
   },
-
-  en: {
-    flag:'🇬🇧', label:'EN',
-    nav_about:'About', nav_skills:'Skills', nav_projects:'Projects', nav_farm:'The Farm', nav_contact:'Contact',
+  en:{
+    flag:'🇬🇧',label:'EN',
+    switch_text:'Web Developer Portfolio', switch_link:'→ Full Portfolio',
+    nav_about:'About',nav_skills:'Skills',nav_projects:'Projects',nav_contact:'Contact',
     hero_location:'Saint-Louis, Senegal',
-    hero_subtitle:'Web developer & agro-pastoral entrepreneur in the heart of Senegal',
-    tag_farming:'Pastoral farming', tag_exp:'10+ yrs field',
-    cta_projects:'See my projects', cta_contact:'Contact me',
-    card_exp_label:'Field experience', card_exp_sub:'years in pastoral farming',
-    card_proj_label:'Delivered projects', card_proj_sub:'PHP / WordPress sites & apps',
-    card_market_label:'Target market', card_market_sub:'100% local solutions',
+    hero_subtitle:'PHP & WordPress web developer — solutions built for the Senegalese market',
+    tag_exp:'6+ delivered projects',
+    cta_projects:'See my projects',cta_contact:'Contact me',
+    card_proj_label:'Delivered projects',card_proj_sub:'PHP apps & WordPress sites',
+    card_stack_label:'Main stack',card_market_label:'Target market',card_market_sub:'100% local solutions',
     location:'Rao, Saint-Louis — Senegal',
-    about_title_1:'Who am ', about_title_2:'I?',
-    about_p1:'Entrepreneur grounded in Senegalese reality, I combine <strong>two complementary worlds</strong>: local-market web development and pastoral livestock farming practiced for over ten years in Rao, Saint-Louis region.',
-    about_p2:'On the tech side, I build sites and applications <strong>designed for Senegal</strong>: French interfaces, Wave and Orange Money integration, FCFA pricing. I deliver complete, deployable products — not code fragments.',
-    about_p3:'On the ground, I run <strong>Mahmoud\'s Farm</strong> — an integrated livestock operation (poultry & ruminants) with a clear entrepreneurial vision and a finalised investment plan for regional markets.',
-    domain1_title:'Web Development', domain1_desc:'Landing pages, e-commerce, WordPress themes and PHP/MySQL apps — from design to full deployment.',
-    domain2_title:'Pastoral Farming', domain2_desc:'Poultry and ruminant farming in Rao. Active entrepreneurial project with business plan and investor pitch ready.',
-    domain3_title:'Local Solutions', domain3_desc:'Senegalese market specialist — Wave, Orange Money, FCFA, and regional distribution networks.',
-    skills_title_1:'Stack & ', skills_title_2:'Expertise',
-    sk_group1:'PHP Backend', sk_group2:'WordPress & Frontend', sk_group3:'Integrations & SN Market',
-    sk_ui:'UI/UX Senegal', sk_deploy:'Deployment & Hosting',
-    proj_title_1:'Delivered ', proj_title_2:'Projects',
-    p1_cat:'E-commerce · Senegalese Crafts', p1_desc:'Full e-commerce platform for selling Senegalese artisan products. Custom PHP admin panel, product catalogue, Wave and Orange Money integration, maintenance documentation delivered to client.',
-    p2_cat:'E-commerce · Household Products', p2_desc:'E-commerce site for a laundry products brand, built with WordPress, custom theme and WooCommerce. Delivered with a professional French-language client quote and user guide.',
-    p3_cat:'Education · University', p3_desc:'WordPress version of the educational platform for UNCHK students. Adapted theme, Moodle integration, embedded YouTube tutorials, Google Drive resources and mobile-first interface.',
-    p4_cat:'Farming · Personal Project', p4_desc:'Promotional showcase site for the Mahmoud\'s Farm agro-pastoral project. Livestock overview, FCFA pricing, mobile contact form, designed for the Saint-Louis local market.',
-    farm_p1:'For over <strong>10 years in Rao</strong>, I have been running a pastoral farming operation combining intensive poultry farming and ruminant livestock. A business rooted in the realities of the Saint-Louis regional market.',
-    farm_p2:'The <strong>Mahmoud\'s Farm</strong> project targets local and regional distribution networks, with a complete business plan and investor pitch already finalised for funding.',
-    farm_s1:'Years of field experience', farm_s2:'Livestock sectors', farm_s3:'Saint-Louis Region', farm_s4:'Funding in progress',
-    farm_i1_name:'Poultry', farm_i1_desc:'Broilers & laying hens',
-    farm_i2_name:'Sheep', farm_i2_desc:'Sheep farming, local circuits',
-    farm_i3_name:'Cattle', farm_i3_desc:'Bovine farming, milk & meat',
-    farm_i4_name:'Business Plan', farm_i4_desc:'Full pitch deck & financial plan',
-    contact_title_1:'Let\'s work ', contact_title_2:'together',
-    contact_intro:'Web project, WordPress site, local e-commerce or livestock investment — I am open to any serious collaboration from Saint-Louis.',
-    contact_email:'Email', contact_phone:'Phone',
-    payment_transfer:'🏦 FCFA Transfer',
-    footer_sig:'Code · Livestock · Vision',
-    dir:'ltr', htmlLang:'en'
+    about_t1:'Who am ',about_t2:'I?',
+    about_p1:'Freelance web developer based in Rao, I build <strong>PHP/MySQL and WordPress</strong> sites and apps tailored to the Senegalese market. Every project is delivered turnkey: mockups, code, admin panel, deployment and documentation.',
+    about_p2:'My speciality: integrating <strong>Wave and Orange Money</strong>, working in local currency and building interfaces Senegalese users understand intuitively. I am also studying for a Web & Mobile Development degree at UNCHK.',
+    about_p3:'I deliver <strong>complete products</strong>, not code fragments — from specifications to deployment on Hostinger or any other host.',
+    d1_title:'Custom PHP Applications',d1_desc:'Admin panels, tontine management, rental platforms — clean and secure MVC architecture.',
+    d2_title:'WordPress & WooCommerce Sites',d2_desc:'Custom themes, online stores, bespoke plugins with a user guide delivered to the client.',
+    d3_title:'SN Mobile Payments',d3_desc:'Wave API, Orange Money integration — local mobile payments mastered.',
+    sk_t1:'Stack & ',sk_t2:'Skills',
+    sk_g1:'PHP Backend',sk_g2:'WordPress & Frontend',sk_g3:'Integrations & Tools',
+    sk_deploy:'Hostinger / Deployment',
+    pr_t1:'Delivered ',pr_t2:'Projects',
+    p1_cat:'E-commerce · Multi-use liquid soap',p1_desc:'E-commerce site for a Senegalese liquid soap brand. Full admin panel: product, order and video management, CSV export. WhatsApp & local mobile payment integration. Deployed on Hostinger after migration from InfinityFree.',
+    p2_cat:'Fintech · Community savings',p2_desc:'Community tontine management platform in pure PHP MVC (no framework). Modules: cycles, loans, savings, medical aid, events, mobile payments, PDF/CSV exports. MariaDB & WAMP/Windows compatible.',
+    p3_cat:'Car rental · Fleet management',p3_desc:'Car rental management platform — end-of-cycle project (project lead, 9-member team). PHP MVC architecture, designed and validated interface, GitHub workflow, Hostinger deployment.',
+    p4_cat:'E-commerce · Senegalese crafts',p4_desc:'Full e-commerce platform for Senegalese artisan products. Custom PHP admin panel, product catalogue, Wave and Orange Money integration, maintenance docs delivered.',
+    p5_cat:'E-commerce · Household products',p5_desc:'E-commerce site for a laundry brand built with WordPress, custom theme and WooCommerce. Delivered with professional quote and user guide.',
+    p6_cat:'Education · UNCHK University',p6_desc:'WordPress educational platform for UNCHK students. Adapted theme, Moodle integration, embedded YouTube tutorials, Google Drive resources and mobile-first interface.',
+    ct_t1:'Let\'s work ',ct_t2:'together',
+    ct_intro:'Web project, WordPress site, local e-commerce or custom PHP app — available from Saint-Louis for any serious quote.',
+    ct_email:'Email',ct_phone:'Phone',ct_transfer:'🏦 Local Transfer',
+    qr_label:'Scan to contact me',qr_download:'⬇ Download',
+    footer_sig:'Code · PHP · WordPress',dir:'ltr',htmlLang:'en'
   },
-
-  ar: {
-    flag:'🇸🇦', label:'AR',
-    nav_about:'من أنا', nav_skills:'المهارات', nav_projects:'المشاريع', nav_farm:'المزرعة', nav_contact:'التواصل',
+  ar:{
+    flag:'🇸🇦',label:'AR',
+    switch_text:'ملف أعمال المطوّر', switch_link:'→ الملف الكامل',
+    nav_about:'من أنا',nav_skills:'المهارات',nav_projects:'المشاريع',nav_contact:'التواصل',
     hero_location:'سان لويس، السنغال',
-    hero_subtitle:'مطوّر ويب ورائد أعمال في مجال تربية المواشي في قلب السنغال',
-    tag_farming:'تربية المواشي', tag_exp:'+10 سنوات خبرة',
-    cta_projects:'مشاريعي', cta_contact:'تواصل معي',
-    card_exp_label:'الخبرة الميدانية', card_exp_sub:'سنوات في تربية المواشي',
-    card_proj_label:'المشاريع المنجزة', card_proj_sub:'مواقع وتطبيقات PHP / WordPress',
-    card_market_label:'السوق المستهدف', card_market_sub:'حلول محلية 100%',
+    hero_subtitle:'مطوّر ويب PHP وWordPress — حلول مصمَّمة للسوق السنغالية',
+    tag_exp:'+6 مشاريع منجزة',
+    cta_projects:'مشاريعي',cta_contact:'تواصل معي',
+    card_proj_label:'المشاريع المنجزة',card_proj_sub:'تطبيقات PHP ومواقع WordPress',
+    card_stack_label:'المنصة الأساسية',card_market_label:'السوق المستهدف',card_market_sub:'حلول محلية 100%',
     location:'راو، سان لويس — السنغال',
-    about_title_1:'من ', about_title_2:'أنا؟',
-    about_p1:'رائد أعمال متجذّر في الواقع السنغالي، أجمع بين <strong>عالمَين متكاملَين</strong>: تطوير الويب الموجّه للسوق المحلية، وتربية المواشي التي أمارسها منذ أكثر من عشر سنوات في راو بمنطقة سان لويس.',
-    about_p2:'في الجانب التقني، أصمّم مواقع وتطبيقات <strong>مصمَّمة للسنغال</strong>: واجهات بالفرنسية، ودمج لـ Wave وOrange Money، وتسعير بالفرنك الأفريقي. أسلّم منتجات كاملة وقابلة للنشر.',
-    about_p3:'أما في الميدان، فأدير <strong>مزرعة محمود</strong> — تربية متكاملة للدواجن والمجترات، برؤية ريادية واضحة وخطة استثمار جاهزة.',
-    domain1_title:'تطوير الويب', domain1_desc:'مواقع عرض، متاجر إلكترونية، قوالب WordPress وتطبيقات PHP/MySQL — من التصميم إلى النشر الكامل.',
-    domain2_title:'تربية المواشي', domain2_desc:'تربية الدواجن والمجترات في راو. مشروع ريادي نشط مع خطة عمل وعرض تقديمي للمستثمرين جاهز.',
-    domain3_title:'حلول محلية', domain3_desc:'متخصص في السوق السنغالية — Wave وOrange Money والفرنك الأفريقي وشبكات التوزيع الإقليمية.',
-    skills_title_1:'المهارات و', skills_title_2:'الخبرات',
-    sk_group1:'PHP الخلفية', sk_group2:'WordPress والواجهة', sk_group3:'التكاملات والسوق السنغالية',
-    sk_ui:'UI/UX السنغال', sk_deploy:'النشر والاستضافة',
-    proj_title_1:'المشاريع ', proj_title_2:'المنجزة',
-    p1_cat:'تجارة إلكترونية · حرف سنغالية', p1_desc:'منصة تجارة إلكترونية كاملة لبيع المنتجات الحرفية السنغالية. لوحة تحكم PHP مخصصة، كتالوج منتجات، دمج Wave وOrange Money، وتوثيق صيانة مسلَّم للعميل.',
-    p2_cat:'تجارة إلكترونية · منتجات منزلية', p2_desc:'موقع تجارة إلكترونية لعلامة منتجات غسيل، مُنجز بـ WordPress مع قالب مخصص وWooCommerce، مع تسليم عرض سعر احترافي ودليل استخدام.',
-    p3_cat:'تعليم · جامعة', p3_desc:'نسخة WordPress من المنصة التعليمية لطلاب UNCHK، مع قالب مُكيَّف ودمج Moodle وتضمين دروس YouTube وموارد Google Drive وواجهة mobile-first.',
-    p4_cat:'مزرعة · مشروع شخصي', p4_desc:'موقع عرض ترويجي لمشروع مزرعة محمود. عرض للقطاعات، أسعار بالفرنك الأفريقي، نموذج تواصل للجوال، مصمَّم للسوق المحلية بسان لويس.',
-    farm_p1:'منذ أكثر من <strong>10 سنوات في راو</strong>، أدير مزرعة رعوية تجمع بين تربية الدواجن المكثّفة والمجترات، نشاط راسخ في واقع سوق منطقة سان لويس.',
-    farm_p2:'يستهدف مشروع <strong>مزرعة محمود</strong> شبكات التوزيع المحلية والإقليمية، مع خطة عمل كاملة وعرض للمستثمرين جاهز لطلب التمويل.',
-    farm_s1:'سنوات من الخبرة الميدانية', farm_s2:'قطاعات تربية', farm_s3:'منطقة سان لويس', farm_s4:'تمويل قيد الإنجاز',
-    farm_i1_name:'الدواجن', farm_i1_desc:'دجاج اللحم والبياض',
-    farm_i2_name:'الأغنام', farm_i2_desc:'تربية الأغنام، دوائر محلية',
-    farm_i3_name:'الأبقار', farm_i3_desc:'تربية الأبقار، لبن ولحم',
-    farm_i4_name:'خطة العمل', farm_i4_desc:'عرض تقديمي وخطة مالية كاملة',
-    contact_title_1:'لنعمل ', contact_title_2:'معاً',
-    contact_intro:'مشروع ويب أو موقع WordPress أو تجارة إلكترونية محلية أو استثمار في المزرعة — أنا منفتح على أي تعاون جادّ من سان لويس.',
-    contact_email:'البريد الإلكتروني', contact_phone:'الهاتف',
-    payment_transfer:'🏦 تحويل FCFA',
-    footer_sig:'برمجة · مزرعة · رؤية',
-    dir:'rtl', htmlLang:'ar'
-  },
-
+    about_t1:'من ',about_t2:'أنا؟',
+    about_p1:'مطوّر ويب مستقل مقيم في راو، أصمّم مواقع وتطبيقات <strong>PHP/MySQL وWordPress</strong> مُكيَّفة لواقع السوق السنغالية. كل مشروع يُسلَّم جاهزاً: مقاطع تصميم، كود، لوحة تحكم، نشر وتوثيق.',
+    about_p2:'تخصصي: دمج <strong>Wave وOrange Money</strong>، العمل بالفرنك الأفريقي وبناء واجهات يفهمها المستخدم السنغالي بشكل حدسي. أدرس أيضاً ليسانس تطوير الويب والموبايل في UNCHK.',
+    about_p3:'أُسلّم <strong>منتجات كاملة</strong>، لا أجزاء من الكود — من وثيقة المتطلبات إلى النشر على Hostinger أو أي مضيف آخر.',
+    d1_title:'تطبيقات PHP مخصصة',d1_desc:'لوحات تحكم، إدارة تونتين، منصات تأجير — بنية MVC نظيفة وآمنة.',
+    d2_title:'مواقع WordPress وWooCommerce',d2_desc:'قوالب مخصصة، متاجر إلكترونية، إضافات على الطلب مع دليل استخدام مُسلَّم للعميل.',
+    d3_title:'مدفوعات الجوال السنغالية',d3_desc:'دمج Wave API وOrange Money والتسعير بالفرنك الأفريقي — منظومة الدفع المحلية متقنة.',
+    sk_t1:'المنصة و',sk_t2:'المهارات',
+    sk_g1:'PHP الخلفية',sk_g2:'WordPress والواجهة',sk_g3:'التكاملات والأدوات',
+    sk_deploy:'Hostinger / النشر',
+    pr_t1:'المشاريع ',pr_t2:'المنجزة',
+    p1_cat:'تجارة إلكترونية · صابون سائل متعدد الاستخدامات',p1_desc:'موقع تجارة إلكترونية لعلامة صابون سنغالية. لوحة تحكم كاملة: إدارة المنتجات والطلبات والفيديوهات، تصدير CSV، دمج WhatsApp والمدفوعات المحلية عبر الجوال. نُشر على Hostinger بعد الترحيل من InfinityFree.',
+    p2_cat:'تقنية مالية · ادخار جماعي',p2_desc:'منصة إدارة تونتين جماعية بـ PHP MVC خالص. وحدات: الدورات، القروض، الادخار، المساعدة الطبية، الفعاليات، المدفوعات، تصدير PDF/CSV.',
+    p3_cat:'تأجير سيارات · إدارة أسطول',p3_desc:'منصة إدارة تأجير سيارات — مشروع نهاية الدورة (مدير المشروع، فريق 9 أشخاص). بنية PHP MVC، واجهة مصمَّمة ومُعتمَدة، سير عمل GitHub، نشر على Hostinger.',
+    p4_cat:'تجارة إلكترونية · حرف سنغالية',p4_desc:'منصة تجارة إلكترونية كاملة لبيع المنتجات الحرفية السنغالية. لوحة تحكم PHP مخصصة، كتالوج منتجات، دمج Wave وOrange Money، توثيق صيانة مُسلَّم.',
+    p5_cat:'تجارة إلكترونية · منتجات منزلية',p5_desc:'موقع تجارة إلكترونية لعلامة منتجات غسيل بـ WordPress مع قالب مخصص وWooCommerce. مُسلَّم مع عرض سعر ودليل استخدام.',
+    p6_cat:'تعليم · جامعة UNCHK',p6_desc:'منصة تعليمية WordPress لطلاب UNCHK. قالب مُكيَّف، دمج Moodle، دروس YouTube مضمَّنة، موارد Google Drive وواجهة mobile-first.',
+    ct_t1:'لنعمل ',ct_t2:'معاً',
+    ct_intro:'مشروع ويب أو موقع WordPress أو تجارة إلكترونية أو تطبيق PHP مخصص — متاح من سان لويس لأي طلب عرض سعر جادّ.',
+    ct_email:'البريد الإلكتروني',ct_phone:'الهاتف',ct_transfer:'🏦 تحويل محلي',
+    qr_label:'امسح للتواصل معي',qr_download:'⬇ تنزيل',
+    footer_sig:'برمجة · PHP · WordPress',dir:'rtl',htmlLang:'ar'
+  }
 };
 
-/* Apply translation */
-let currentLang = 'fr';
-function applyLang(code) {
-  const t = LANGS[code];
-  if (!t) return;
-  currentLang = code;
-
-  // HTML dir & lang
-  document.documentElement.setAttribute('dir', t.dir);
-  document.documentElement.setAttribute('lang', t.htmlLang);
-
-  // Translate all data-i18n elements
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (t[key] !== undefined) el.innerHTML = t[key];
+let currentLang='fr';
+function applyLang(code){
+  const t=window.LANGS[code]; if(!t)return;
+  currentLang=code;
+  document.documentElement.setAttribute('dir',t.dir);
+  document.documentElement.setAttribute('lang',t.htmlLang);
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k=el.getAttribute('data-i18n');
+    if(t[k]!==undefined)el.innerHTML=t[k];
   });
-
-  // Update dropdown button
-  document.getElementById('currentFlag').textContent = t.flag;
-  document.getElementById('currentLangLabel').textContent = t.label;
-
-  // Update active state in menu
-  document.querySelectorAll('.lang-option').forEach(opt => {
-    opt.classList.toggle('active', opt.dataset.lang === code);
-  });
-
-  // Skill bar direction
-  document.querySelectorAll('.skill-fill').forEach(f => {
-    f.style.transformOrigin = t.dir === 'rtl' ? 'right' : 'left';
-  });
-
-  localStorage.setItem('lang', code);
+  document.getElementById('currentFlag').textContent=t.flag;
+  document.getElementById('currentLangLabel').textContent=t.label;
+  document.querySelectorAll('.lang-option').forEach(o=>o.classList.toggle('active',o.dataset.lang===code));
+  document.querySelectorAll('.skill-fill').forEach(f=>f.style.transformOrigin=t.dir==='rtl'?'right':'left');
+  localStorage.setItem('lang',code);
 }
 
-/* ===== LANG DROPDOWN ===== */
-const dropdown = document.getElementById('langDropdown');
-const langBtn  = document.getElementById('langBtn');
+/* Lang dropdown */
+const dd=document.getElementById('langDropdown');
+document.getElementById('langBtn').addEventListener('click',()=>dd.classList.toggle('open'));
+document.addEventListener('click',e=>{ if(!dd.contains(e.target))dd.classList.remove('open'); });
+document.querySelectorAll('.lang-option').forEach(o=>o.addEventListener('click',()=>{ applyLang(o.dataset.lang);dd.classList.remove('open'); }));
 
-langBtn.addEventListener('click', () => dropdown.classList.toggle('open'));
-document.addEventListener('click', e => {
-  if (!dropdown.contains(e.target)) dropdown.classList.remove('open');
+/* Theme */
+document.getElementById('themeToggle').addEventListener('click',()=>{
+  const t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',t);
+  localStorage.setItem('theme',t);
 });
-document.querySelectorAll('.lang-option').forEach(opt => {
-  opt.addEventListener('click', () => {
-    applyLang(opt.dataset.lang);
-    dropdown.classList.remove('open');
-  });
-});
+const st=localStorage.getItem('theme');
+if(st)document.documentElement.setAttribute('data-theme',st);
+else if(window.matchMedia('(prefers-color-scheme: light)').matches)document.documentElement.setAttribute('data-theme','light');
 
-/* Restore lang */
-const savedLang = localStorage.getItem('lang');
-if (savedLang && LANGS[savedLang]) applyLang(savedLang);
-
-/* ===== THEME TOGGLE ===== */
-const themeBtn = document.getElementById('themeToggle');
-function setTheme(t) {
-  document.documentElement.setAttribute('data-theme', t);
-  localStorage.setItem('theme', t);
-}
-themeBtn.addEventListener('click', () => {
-  setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-});
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) setTheme(savedTheme);
-else if (window.matchMedia('(prefers-color-scheme: light)').matches) setTheme('light');
-
-/* ===== CURSOR ===== */
-const cursor = document.getElementById('cursor');
-const ring   = document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove', e => {
-  mx=e.clientX; my=e.clientY;
-  cursor.style.left=mx+'px'; cursor.style.top=my+'px';
-});
-(function loop(){
-  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
-  ring.style.left=rx+'px'; ring.style.top=ry+'px';
-  requestAnimationFrame(loop);
-})();
-document.querySelectorAll('a,button,.project-card,.domain-card,.farm-item,.lang-option').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{ cursor.style.transform='translate(-50%,-50%) scale(2)'; ring.style.borderColor='#D4A017'; });
-  el.addEventListener('mouseleave',()=>{ cursor.style.transform='translate(-50%,-50%) scale(1)'; ring.style.borderColor='#C4884A'; });
-});
-
-/* ===== SCROLL ANIMATIONS ===== */
-const obs = new IntersectionObserver(e=>{
-  e.forEach(x=>{ if(x.isIntersecting) x.target.classList.add('visible'); });
-},{threshold:0.1});
+/* Scroll */
+const obs=new IntersectionObserver(e=>e.forEach(x=>{ if(x.isIntersecting)x.target.classList.add('visible'); }),{threshold:0.1});
 document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
 
-/* ===== SKILL BARS ===== */
-const skillObs = new IntersectionObserver(e=>{
-  e.forEach(x=>{
-    if(!x.isIntersecting) return;
-    x.target.querySelectorAll('.skill-fill').forEach((f,i)=>{
-      const w = parseFloat(f.dataset.w)||0.8;
-      const dir = document.documentElement.getAttribute('dir')||'ltr';
-      f.style.transformOrigin = dir==='rtl' ? 'right' : 'left';
-      setTimeout(()=>{ f.style.transform=`scaleX(${w})`; }, i*80);
-    });
+/* Skill bars */
+const so=new IntersectionObserver(e=>e.forEach(x=>{
+  if(!x.isIntersecting)return;
+  x.target.querySelectorAll('.skill-fill').forEach((f,i)=>{
+    const w=parseFloat(f.dataset.w)||0.8;
+    const d=document.documentElement.getAttribute('dir')||'ltr';
+    f.style.transformOrigin=d==='rtl'?'right':'left';
+    setTimeout(()=>f.style.transform=`scaleX(${w})`,i*75);
   });
-},{threshold:0.3});
-document.querySelectorAll('.skill-group').forEach(g=>skillObs.observe(g));
+}),{threshold:0.3});
+document.querySelectorAll('.skill-group').forEach(g=>so.observe(g));
+
+/* QR natif */
+const CONTACT={name:'Mouhameth Konaté',phone:'+221785237967',email:'mouhamethkonate0@gmail.com',website:'https://konatemahmoud.github.io/Portfolio1',address:'Rao, Saint-Louis, Sénégal',linkedin:'https://linkedin.com/in/mouhameth-konate'};
+function buildVCard(c){return['BEGIN:VCARD','VERSION:3.0','FN:'+c.name,'N:Konaté;Mouhameth;;;','TEL;TYPE=CELL:'+c.phone,'EMAIL:'+c.email,'URL:'+c.website,'ADR;TYPE=HOME:;;'+c.address+';;;;','X-SOCIALPROFILE;type=linkedin:'+c.linkedin,'END:VCARD'].join('\n');}
+(function(){const GF={exp:new Uint8Array(512),log:new Uint8Array(256)};(function(){let x=1;for(let i=0;i<255;i++){GF.exp[i]=x;GF.log[x]=i;x=(x<<1)^(x&128?285:0);}for(let i=255;i<512;i++)GF.exp[i]=GF.exp[i-255];}());const gmul=(a,b)=>a&&b?GF.exp[(GF.log[a]+GF.log[b])%255]:0;function genpoly(n){let p=[1];for(let i=0;i<n;i++){const q=[0,...p];for(let j=0;j<q.length;j++)q[j]^=gmul(p[j]||0,GF.exp[i]);p=q;}return p.slice(1);}function rsec(data,n){const poly=genpoly(n),msg=[...data,...new Array(n).fill(0)];for(let i=0;i<data.length;i++){const c=msg[i];if(c)for(let j=0;j<poly.length;j++)msg[i+1+j]^=gmul(c,poly[j]);}return msg.slice(data.length);}const DCAP=34,ECC_PER_BLOCK=10,SIZE=25;function qrEncode(text){const bytes=Array.from(new TextEncoder().encode(text));const bits=[];const push=(v,n)=>{for(let i=n-1;i>=0;i--)bits.push((v>>i)&1);};push(4,4);push(bytes.length,8);bytes.forEach(b=>push(b,8));while(bits.length%8)bits.push(0);const pads=[0xEC,0x11];let pi=0;while(bits.length<DCAP*8)bits.push(...pads[pi++%2].toString(2).padStart(8,'0').split('').map(Number));const cw=[];for(let i=0;i<bits.length;i+=8){let v=0;for(let j=0;j<8;j++)v=(v<<1)|bits[i+j];cw.push(v);}const ec=rsec(cw.slice(0,DCAP),ECC_PER_BLOCK);const allcw=[...cw.slice(0,DCAP),...ec];const M=Array.from({length:SIZE},()=>new Array(SIZE).fill(-1));function finder(r,c){for(let i=-1;i<=7;i++)for(let j=-1;j<=7;j++){if(r+i<0||r+i>=SIZE||c+j<0||c+j>=SIZE)continue;M[r+i][c+j]=(i>=0&&i<=6&&(j==0||j==6))||(j>=0&&j<=6&&(i==0||i==6))||(i>=2&&i<=4&&j>=2&&j<=4)?1:0;}}finder(0,0);finder(0,SIZE-7);finder(SIZE-7,0);for(let i=8;i<SIZE-8;i++){M[6][i]=i%2==0?1:0;M[i][6]=i%2==0?1:0;}M[4*2+9][8]=1;[0,1,2,3,4,5,7].forEach(i=>{M[8][i]=0;M[i][8]=0;});M[8][8]=0;M[7][8]=0;[SIZE-7,SIZE-6,SIZE-5,SIZE-4,SIZE-3,SIZE-2,SIZE-1].forEach(i=>{M[8][i]=0;M[i][8]=0;});let bit=0,dir=-1,row=SIZE-1;for(let col=SIZE-1;col>=0;col-=2){if(col==6)col--;for(let cnt=0;cnt<SIZE;cnt++){const r=dir<0?row-cnt:row+cnt;if(r<0||r>=SIZE)continue;for(let dc=0;dc<2;dc++){const c=col-dc;if(c<0)continue;if(M[r][c]==-1){const allbits=allcw.flatMap(b=>Array.from({length:8},(_,i)=>(b>>(7-i))&1));M[r][c]=allbits[bit++]||0;}}}row+=dir<0?SIZE:-SIZE;dir*=-1;row=dir<0?SIZE-1:0;}for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++)if(M[r][c]==-1)M[r][c]=0;const fmt=0x5412;function applyFmt(bits15){const fb=bits15.toString(2).padStart(15,'0').split('').map(Number);const seq=[...fb.slice(0,6),fb[6],fb[7],...fb.slice(8)];[0,1,2,3,4,5,7].forEach((c,i)=>{M[8][c]=seq[i];M[c][8]=seq[i];});M[8][8]=seq[7];M[7][8]=seq[7];[SIZE-1,SIZE-2,SIZE-3,SIZE-4,SIZE-5,SIZE-6,SIZE-7].forEach((r,i)=>{M[r][8]=seq[i+8];});[SIZE-8,SIZE-7,SIZE-6,SIZE-5,SIZE-4,SIZE-3,SIZE-2].forEach((c,i)=>{M[8][c]=seq[i+8];});}applyFmt(fmt^0x5412);for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++)if((r+c)%2===0)M[r][c]^=1;applyFmt(fmt^0x5412);return M;}function drawQR(matrix,canvas,px){const S=matrix.length,size=(S+8)*px;canvas.width=canvas.height=size;const ctx=canvas.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,size,size);ctx.fillStyle='#050F0A';const off=4*px;for(let r=0;r<S;r++)for(let c=0;c<S;c++)if(matrix[r][c])ctx.fillRect(off+c*px,off+r*px,px,px);}window.renderQR=function(text,canvas,px=4){try{drawQR(qrEncode(text),canvas,px);return true;}catch(e){return false;}};})();
+function initQR(){const frame=document.querySelector('.qr-frame');const canvas=document.getElementById('qrCanvas');if(!frame||!canvas)return;if(!window.renderQR(buildVCard(CONTACT),canvas,4)){frame.innerHTML='<div style="font-size:0.7rem;color:#007A7A;padding:1rem;">QR non disponible</div>';return;}const dlBtn=document.getElementById('qrDownload');if(dlBtn){dlBtn.addEventListener('click',()=>{const a=document.createElement('a');a.href=canvas.toDataURL('image/png');a.download='contact-mouhameth-konate.png';a.click();});}}
+initQR();
+
+/* Restore lang */
+const sl=localStorage.getItem('lang');
+if(sl&&window.LANGS[sl])applyLang(sl);
 </script>
 </body>
 </html>
