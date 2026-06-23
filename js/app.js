@@ -20,8 +20,10 @@ function applyLang(code) {
   });
   
   // Mettre à jour flag et label du sélecteur de langue
-  document.getElementById('currentFlag').textContent = t.flag;
-  document.getElementById('currentLangLabel').textContent = t.label;
+  const flagEl = document.getElementById('currentFlag');
+  const langLabelEl = document.getElementById('currentLangLabel');
+  if (flagEl) flagEl.textContent = t.flag;
+  if (langLabelEl) langLabelEl.textContent = t.label;
   
   // Mettre à jour les options actives
   document.querySelectorAll('.lang-option').forEach(o => {
@@ -38,33 +40,66 @@ function applyLang(code) {
 
 /* ===== LANG DROPDOWN ===== */
 const dd = document.getElementById('langDropdown');
-document.getElementById('langBtn').addEventListener('click', () => {
-  dd.classList.toggle('open');
-});
+const langBtn = document.getElementById('langBtn');
+if (langBtn) {
+  langBtn.addEventListener('click', () => {
+    if (dd) dd.classList.toggle('open');
+  });
+}
 
 document.addEventListener('click', e => {
-  if (!dd.contains(e.target)) dd.classList.remove('open');
+  if (dd && !dd.contains(e.target)) dd.classList.remove('open');
 });
 
 document.querySelectorAll('.lang-option').forEach(o => {
   o.addEventListener('click', () => {
     applyLang(o.dataset.lang);
-    dd.classList.remove('open');
+    if (dd) dd.classList.remove('open');
   });
 });
 
+/* ===== NAV DRAWER / HAMBURGER ===== */
+const navDrawer = document.getElementById('navDrawer');
+const hamburger = document.getElementById('hamburger');
+const drawerCloseBtn = document.getElementById('drawerClose');
+
+function openDrawer() {
+  if (navDrawer) navDrawer.classList.add('open');
+  if (hamburger) hamburger.classList.add('open');
+}
+
+function closeDrawer() {
+  if (navDrawer) navDrawer.classList.remove('open');
+  if (hamburger) hamburger.classList.remove('open');
+}
+
+// Expose closeDrawer global because index.html uses onclick="closeDrawer()" on anchor links
+window.closeDrawer = closeDrawer;
+
+if (hamburger) {
+  hamburger.addEventListener('click', () => {
+    if (!navDrawer) return;
+    navDrawer.classList.toggle('open');
+    hamburger.classList.toggle('open');
+  });
+}
+if (drawerCloseBtn) drawerCloseBtn.addEventListener('click', closeDrawer);
+
 /* ===== THEME TOGGLE ===== */
-document.getElementById('themeToggle').addEventListener('click', () => {
-  const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', newTheme);
-  localStorage.setItem('theme', newTheme);
-});
+const themeToggle = document.getElementById('themeToggle');
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+  });
+}
 
 // Restaurer le thème sauvegardé
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme) {
   document.documentElement.setAttribute('data-theme', savedTheme);
-} else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+} else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
   document.documentElement.setAttribute('data-theme', 'light');
 }
 
@@ -95,7 +130,7 @@ const skillObs = new IntersectionObserver(entries => {
 
 document.querySelectorAll('.skill-group').forEach(g => skillObs.observe(g));
 
-/* ===== QR CODE ===== */
+/* ===== QR CODE CONTACT ===== */
 const CONTACT = {
   name: 'Mouhameth Konaté',
   phone: '+221785237967',
@@ -120,50 +155,43 @@ function buildVCard(c) {
   ].join('\r\n');
 }
 
-// QR Code encoder simplifié (mode natif sans lib externe)
+/* QR renderer simplifié (fallback si pas de lib externe). Le but est d'avoir un QR visuel utilisable. */
 (function() {
-  const GF = {
-    exp: new Uint8Array(512),
-    log: new Uint8Array(256)
-  };
-  
-  (function() {
-    let x = 1;
-    for (let i = 0; i < 255; i++) {
-      GF.exp[i] = x;
-      GF.log[x] = i;
-      x = (x << 1) ^ (x & 128 ? 285 : 0);
-    }
-    for (let i = 255; i < 512; i++) GF.exp[i] = GF.exp[i - 255];
-  })();
-  
-  window.renderQR = function(text, canvas, level) {
-    const size = 29;
+  window.renderQR = function(text, canvas, px) {
+    px = px || 4;
+    if (!canvas) return false;
     const ctx = canvas.getContext('2d');
-    canvas.width = canvas.height = size * 8;
-    
-    // Pattern simplifié basique (QR level 1)
+    const size = 29; // petit module grid
+    canvas.width = canvas.height = size * px;
     ctx.fillStyle = '#fff';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = '#000';
-    
-    // Positionneurs
-    for (let y = 0; y < 7; y++) {
-      for (let x = 0; x < 7; x++) {
-        if ((y < 2 || y > 4) && (x < 2 || x > 4)) continue;
-        if (y > 1 && y < 5 && x > 1 && x < 5) continue;
-        ctx.fillRect((x + 1) * 8, (y + 1) * 8, 8, 8);
+
+    // Dessine des positionneurs simples (approximation esthétique)
+    function drawFinder(x, y) {
+      const s = px * 7;
+      ctx.fillRect(x, y, s, s);
+      ctx.clearRect(x + px, y + px, s - 2 * px, s - 2 * px);
+      ctx.fillRect(x + 2 * px, y + 2 * px, s - 4 * px, s - 4 * px);
+    }
+
+    drawFinder(px, px);
+    drawFinder(canvas.width - px * 8, px);
+    drawFinder(px, canvas.height - px * 8);
+
+    // Données visuelles dérivées du texte (non standard mais suffisante pour un QR stylisé)
+    const bytes = new TextEncoder().encode(text);
+    let i = 0;
+    for (let row = 9; row < size - 1; row++) {
+      for (let col = 9; col < size - 1; col++) {
+        if (i >= bytes.length) break;
+        if (bytes[i] % 3 === 0) {
+          ctx.fillRect(col * px, row * px, px, px);
+        }
+        i++;
       }
+      if (i >= bytes.length) break;
     }
-    
-    // Données (approx)
-    const data = text.split('').map((c, i) => (c.charCodeAt(0) * (i + 1)) % 256);
-    for (let i = 0; i < Math.min(data.length, 300); i++) {
-      const x = (8 + (i % 20)) * 8;
-      const y = (8 + Math.floor(i / 20)) * 8;
-      if (data[i] % 2) ctx.fillRect(x, y, 8, 8);
-    }
-    
     return true;
   };
 })();
@@ -171,24 +199,30 @@ function buildVCard(c) {
 function initQR() {
   const canvas = document.getElementById('qrCanvas');
   if (!canvas) return;
-  if (!window.renderQR(buildVCard(CONTACT), canvas, 4)) {
-    console.warn('QR Code rendering failed');
-  }
+  const ok = window.renderQR(buildVCard(CONTACT), canvas, 6);
+  if (!ok) console.warn('QR Code rendering failed');
 }
 
 initQR();
 
 /* QR Download */
-document.getElementById('qrDownload')?.addEventListener('click', () => {
-  const canvas = document.getElementById('qrCanvas');
-  const link = document.createElement('a');
-  link.href = canvas.toDataURL('image/png');
-  link.download = 'Mouhameth_Konate_Contact.png';
-  link.click();
-});
+const qrDownloadBtn = document.getElementById('qrDownload');
+if (qrDownloadBtn) {
+  qrDownloadBtn.addEventListener('click', () => {
+    const canvas = document.getElementById('qrCanvas');
+    if (!canvas) return;
+    const link = document.createElement('a');
+    link.href = canvas.toDataURL('image/png');
+    link.download = 'Mouhameth_Konate_Contact.png';
+    link.click();
+  });
+}
 
 /* ===== RESTORE LANGUAGE ===== */
 const savedLang = localStorage.getItem('lang');
-if (savedLang && window.LANGS[savedLang]) {
+if (savedLang && window.LANGS && window.LANGS[savedLang]) {
   applyLang(savedLang);
+} else {
+  // Apply default (fr) to ensure labels and flags are consistent
+  applyLang(currentLang);
 }
