@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Page principale -->
+  <url>
+    <loc>https://konatemahmoud.github.io/Portfolio1/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://konatemahmoud.github.io/Portfolio1/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://konatemahmoud.github.io/Portfolio1/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://konatemahmoud.github.io/Portfolio1/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://konatemahmoud.github.io/Portfolio1/"/>
+  </url>
+
+  <!-- Page Contact -->
+  <url>
+    <loc>https://konatemahmoud.github.io/Portfolio1/contact.html</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://konatemahmoud.github.io/Portfolio1/contact.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://konatemahmoud.github.io/Portfolio1/contact.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://konatemahmoud.github.io/Portfolio1/contact.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://konatemahmoud.github.io/Portfolio1/contact.html"/>
+  </url>
+
+</urlset>

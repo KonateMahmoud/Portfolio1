@@ -1,0 +1,13 @@
+# robots.txt — Mouhameth Konaté Portfolio
+# https://konatemahmoud.github.io/Portfolio1
+
+User-agent: *
+Allow: /
+
+# Ressources statiques
+Allow: /css/
+Allow: /js/
+Allow: /img/
+
+# Sitemap
+Sitemap: https://konatemahmoud.github.io/Portfolio1/sitemap.xml
