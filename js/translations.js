@@ -45,6 +45,7 @@ window.LANGS = {
     ct_form_budget:'Budget estimé', ct_form_budget_opt:['Moins de 50 000 FCFA','50 000 – 150 000 FCFA','150 000 – 500 000 FCFA','+ 500 000 FCFA','À discuter'],
     /* QR */
     qr_label:'Scanner pour me contacter', qr_download:'⬇ Télécharger',
+    avail_text:'Ouvert aux nouvelles collaborations',
     /* Footer */
     footer_sig:'Code · PHP · WordPress',
     /* Back to top */
@@ -87,6 +88,7 @@ window.LANGS = {
     ct_form_success:'Message sent! I\'ll reply within 24h.',
     ct_form_budget:'Estimated budget', ct_form_budget_opt:['Under 50,000 FCFA','50,000 – 150,000 FCFA','150,000 – 500,000 FCFA','500,000+ FCFA','To discuss'],
     qr_label:'Scan to contact me', qr_download:'⬇ Download',
+    avail_text:'Open to new collaborations',
     footer_sig:'Code · PHP · WordPress',
     back_top:'↑ Top',
   },
@@ -127,6 +129,7 @@ window.LANGS = {
     ct_form_success:'تم الإرسال! سأرد خلال 24 ساعة.',
     ct_form_budget:'الميزانية التقديرية', ct_form_budget_opt:['أقل من 50,000 FCFA','50,000 – 150,000 FCFA','150,000 – 500,000 FCFA','أكثر من 500,000 FCFA','للتفاوض'],
     qr_label:'امسح للتواصل معي', qr_download:'⬇ تنزيل',
+    avail_text:'متاح لتعاونات جديدة',
     footer_sig:'برمجة · PHP · WordPress',
     back_top:'↑ أعلى',
   }
