@@ -241,11 +241,11 @@ footer{padding:1.7rem 4rem;border-top:1px solid var(--border);display:flex;justi
 /* Space Grotesk n'a pas de variant italic — override */
 .section-title em,
 .hero-name span,
-.contact-hero h1 em,
 .footer-sig {
   font-style: normal;
   font-weight: 700;
 }
+/* contact-hero h1 em garde son style défini dans contact.html */
 /* JetBrains Mono — ajustement letter-spacing (plus compact qu'IBM Plex Mono) */
 .hero-eyebrow { letter-spacing: 0.18em; }
 .tag          { letter-spacing: 0.08em; }
